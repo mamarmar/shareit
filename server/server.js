@@ -2,6 +2,10 @@ import express from "express";
 import dotenv from "dotenv"
 import cors from "cors"
 import mongoose from "mongoose";
+//Import route modules
+import userRoutes from "./routes/user";
+import offeredItemRoutes from "./routes/offeredItem";
+import requestedItemRoutes from "./routes/requestedItem";
 
 dotenv.config();
 
@@ -11,6 +15,10 @@ const uri = process.env.MONGODB_URI;
 
 app.use(express.json());
 app.use(cors());
+//Route modules
+app.use("/user", userRoutes);
+app.use("/offeredItems", offeredItemRoutes);
+app.use("/requestedItems", requestedItemRoutes);
 
 //Connection to Database
 mongoose
