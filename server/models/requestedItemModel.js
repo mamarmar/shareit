@@ -14,6 +14,14 @@ const requestedItemSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Item description is required']
         },
+        fromDate: {
+            type: Date,
+            required: [true, 'Date is required']
+        },
+        toDate: {
+            type: Date,
+            required: [true, 'Date is required']
+        },
         indicativeImage: {
             type: String //ability to upload multiple images should be added
         },
@@ -22,13 +30,7 @@ const requestedItemSchema = new mongoose.Schema(
         },
         borrowedBy: {
             type: String
-        },
-        fromDate: {
-            type: Date
-        },
-        toDate: {
-            type: Date
-        }
+        }   
     }
 );
 
