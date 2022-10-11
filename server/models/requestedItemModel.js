@@ -14,6 +14,10 @@ const requestedItemSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Item description is required']
         },
+        city: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'userModel'
+        },
         fromDate: {
             type: Date,
             required: [true, 'Date is required']

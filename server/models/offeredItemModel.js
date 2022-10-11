@@ -18,14 +18,20 @@ const offeredItemSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Item condition is required']
         },
+        city: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'userModel'
+        },
         itemImage: {
             type: String //ability to upload multiple images should be added
         },
         offeredBy: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'userModel'
         },
         borrowedBy: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'userModel'
         },
         reservedFromDate: {
             type: Date
