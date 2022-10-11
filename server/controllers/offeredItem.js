@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import offeredItemModel from "../models/offeredItemModel.js";
 
 //Get all offered items
@@ -74,11 +75,11 @@ export const createOfferedItem = async(req, res) => {
 //Delete offered item
 export const deleteOfferedItem = async (req, res) => {
     const { id } = req.params;
-    try {
-        const offeredItem = await offeredItemModel.findByIdAndRemove({_id: id})
-        res.status(201).json({message: "Offered item deleted successfully."});
-    }
-    catch(err) {
-        res.status(404).json({message: `No offered item with id: ${id}`})
-    }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return (
+            res.status(404).json({message: `No offered item with id: ${id}`})
+        )
+    };
+    await offeredItemModel.findByIdAndRemove({_id: id});
+    res.status(201).json({message: "Offered item deleted successfully."});
 }
