@@ -1,5 +1,5 @@
 import express from "express";
-import { getOfferedItems, getOfferedItemsByName, getOfferedItemsByCity, getOfferedItemsByCategory, createOfferedItem } from "../controllers/offeredItem.js";
+import { getOfferedItems, getOfferedItemsByName, getOfferedItemsByCity, getOfferedItemsByCategory, getOfferedItem, createOfferedItem, deleteOfferedItem } from "../controllers/offeredItem.js";
 
 const router = express.Router();
 
@@ -10,8 +10,10 @@ router.get("/", getOfferedItems);
 router.get("/search/name", getOfferedItemsByName);
 router.get("/search/city", getOfferedItemsByCity);
 router.get("/search/category", getOfferedItemsByCategory);
-// router.get("/:id", getOfferedItem);
+router.get("/:id", getOfferedItem);
 
 router.post("/form", createOfferedItem);
+
+router.delete("/:id", deleteOfferedItem);
 
 export default router;
