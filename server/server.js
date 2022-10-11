@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 //Import route modules
 // import userRoutes from "./routes/user.js";
 import offeredItemRoutes from "./routes/offeredItem.js";
-// import requestedItemRoutes from "./routes/requestedItem.js";
+import requestedItemRoutes from "./routes/requestedItem.js";
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ app.use(cors());
 //Route modules
 // app.use("/user", userRoutes);
 app.use("/offereditems", offeredItemRoutes);
-// app.use("/requesteditems", requestedItemRoutes);
+app.use("/requesteditems", requestedItemRoutes);
 
 //Connection to Database
 mongoose
