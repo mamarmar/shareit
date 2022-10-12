@@ -24,8 +24,8 @@ export const getRequestedItemsBySearch = async(req, res) => {
                 console.log(filtersArr);
             };
         };
-        const requestedItems = await requestedItemModel.find(req.query);
-        res.status(201).json({data: requestedItems});
+        const filteredRequestedItems = await requestedItemModel.find(req.query);
+        res.status(201).json({data: filteredRequestedItems});
     }
     catch(err) {
         res.status(404).json({message: err.message});
