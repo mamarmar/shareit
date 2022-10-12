@@ -13,34 +13,18 @@ export const getRequestedItems = async(req, res) => {
 };
 
 //Get only those requested items that satisfy the search queries
-export const getRequestedItemsByName = async(req, res) => {
+export const getRequestedItemsBySearch = async(req, res) => {
     try {
-        const { name } = req.query;
-        const requestedItems = await requestedItemModel.find({name: name});
-        res.status(201).json({data: requestedItems});
-    }
-    catch(err) {
-        res.status(404).json({message: err.message});
-    }
-}
-
-//Get only those requested items that satisfy the search queries
-export const getRequestedItemsByCity = async(req, res) => {
-    try {
-        const { city } = req.query;
-        const requestedItems = await requestedItemModel.find({city: city});
-        res.status(201).json({data: requestedItems});
-    }
-    catch(err) {
-        res.status(404).json({message: err.message});
-    }
-}
-
-//Get only those requested items that satisfy the search queries
-export const getRequestedItemsByCategory = async(req, res) => {
-    try {
-        const { category } = req.query;
-        const requestedItems = await requestedItemModel.find({category: category});
+        const filtersArr = []
+        for (const filterKey of ['name', 'city', 'category']) {
+            if (req.query.filterKey) {
+                const thisFilter = {};
+                thisFilter[filterKey] = req.query.filterKey;
+                filtersArr.push(thisFilter);
+                console.log(filtersArr);
+            };
+        };
+        const requestedItems = await requestedItemModel.find(req.query);
         res.status(201).json({data: requestedItems});
     }
     catch(err) {
