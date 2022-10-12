@@ -19,8 +19,8 @@ const offeredItemSchema = new mongoose.Schema(
             required: [true, 'Item condition is required']
         },
         city: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            type: String,
+            required: [true, 'City where item is offered is required']
         },
         itemImages: [String],
         offeredBy: {
