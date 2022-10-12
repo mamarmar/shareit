@@ -16,7 +16,7 @@ const requestedItemSchema = new mongoose.Schema(
         },
         city: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'userModel'
+            ref: 'User'
         },
         fromDate: {
             type: Date,
@@ -26,15 +26,15 @@ const requestedItemSchema = new mongoose.Schema(
             type: Date,
             required: [true, 'Date is required']
         },
-        indicativeImage: {
-            type: String //ability to upload multiple images should be added
-        },
+        indicativeImage: [String],
         offeredBy: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
         },
         borrowedBy: {
-            type: String
-        }   
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }
 );
 

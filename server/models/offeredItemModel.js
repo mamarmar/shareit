@@ -20,19 +20,14 @@ const offeredItemSchema = new mongoose.Schema(
         },
         city: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'userModel'
+            ref: 'User'
         },
-        itemImage: {
-            type: String //ability to upload multiple images should be added
-        },
+        itemImages: [String],
         offeredBy: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'userModel'
+            ref: 'User'
         },
-        borrowedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'userModel'
-        },
+        borrowedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], //Array of users because multiple users might borrow the offered item,
         reservedFromDate: {
             type: Date
         },
