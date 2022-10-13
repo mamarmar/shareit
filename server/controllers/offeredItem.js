@@ -49,9 +49,10 @@ export const getOfferedItem = async (req, res) => {
 //Create new offered item
 export const createOfferedItem = async (req, res) => {
   const newOfferedItem = new offeredItemModel(req.body);
+  newOfferedItem.offeredBy = req.user.user_id;   //the item is offered by the user who created the listing
   try {
     await newOfferedItem.save();
-    res.status(201).send("Offered item created successfully");
+    res.status(201).send( `Offered item created successfully: ${newOfferedItem}`);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
