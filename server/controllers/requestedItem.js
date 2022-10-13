@@ -49,7 +49,9 @@ export const getRequestedItem = async (req, res) => {
 //Create new requested item
 export const createRequestedItem = async (req, res) => {
   const newRequestedItem = new requestedItemModel(req.body);
+  newRequestedItem.borrowedBy = req.user.user_id;   //the item is requested by the user who created the listing
   try {
+    await requestedItemModel.findById(newRequestedItem._id).populate('borrowedBy'); //How do I populate borrowedBy with the rest of the user's properties?
     await newRequestedItem.save();
     res.status(201).send("requested item created successfully");
   } catch (err) {
