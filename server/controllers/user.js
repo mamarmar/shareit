@@ -92,3 +92,8 @@ export const getUsers = async(req, res) => {
         res.status(404).json({ message: err.message });
       }
 }
+
+//Welcome user
+export const welcome = async(req, res) => {
+    res.status(200).send("Welcome");
+}
