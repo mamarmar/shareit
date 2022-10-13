@@ -133,8 +133,12 @@ export const deleteUser = async (req, res) => {
         .status(404)
         .json({ message: `No user with id: ${id}` });
     }
-    await userModel.findByIdAndRemove(id);
-    res.status(201).json({ message: "User deleted successfully." });
+    if (req.user.user_id === id) {                          // users can only delete themselves
+        await userModel.findByIdAndRemove(id);
+        res.status(201).json({ message: "User deleted successfully." });
+    } else {
+        res.status(403).send("You are not authorized to delete this user");
+    };
   };
 
 //Welcome user
