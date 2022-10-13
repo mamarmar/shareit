@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import mongoose from "mongoose";
 //Import route modules
-// import userRoutes from "./routes/user.js";
+import userRoutes from "./routes/user.js";
 import offeredItemRoutes from "./routes/offeredItem.js";
 import requestedItemRoutes from "./routes/requestedItem.js";
 
@@ -16,7 +16,7 @@ const uri = process.env.MONGODB_URI;
 app.use(express.json());
 app.use(cors());
 //Route modules
-// app.use("/user", userRoutes);
+app.use("/user", userRoutes);
 app.use("/offereditems", offeredItemRoutes);
 app.use("/requesteditems", requestedItemRoutes);
 
