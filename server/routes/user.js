@@ -1,5 +1,5 @@
 import express from "express";
-import { signup, login, getUsers, welcome} from "../controllers/user.js";
+import { signup, login, getUsers, getUser, deleteUser, welcome} from "../controllers/user.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -7,7 +7,10 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 
-router.get("/all", getUsers);
+router.get("/all", auth, getUsers);
+router.get("/:id", auth, getUser);
 router.get("/welcome", auth, welcome);
+
+router.delete("/:id", auth, deleteUser);
 
 export default router;
