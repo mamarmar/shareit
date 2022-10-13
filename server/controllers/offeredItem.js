@@ -64,6 +64,13 @@ export const deleteOfferedItem = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ message: `No offered item with id: ${id}` });
   }
-  await offeredItemModel.findByIdAndRemove({ _id: id });
-  res.status(201).json({ message: "Offered item deleted successfully." });
+  const offeredItem = await offeredItemModel.findById(id);
+  if (req.user.user_id === offeredItem.offeredBy) {        // users can only delete items they have created themselves
+    await offeredItemModel.findByIdAndRemove(id);
+    res.status(201).json({ message: "Offered item deleted successfully." });
+} else {
+    res.status(403).send("You are not authorized to delete this item");
+};
+  
+ 
 };

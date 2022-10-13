@@ -32,8 +32,9 @@ const requestedItemSchema = new mongoose.Schema(
             ref: 'User'
         },
         borrowedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'User'
+            type: String
         }
     }
 );

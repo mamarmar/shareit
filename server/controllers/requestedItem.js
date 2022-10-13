@@ -51,7 +51,7 @@ export const createRequestedItem = async (req, res) => {
   const newRequestedItem = new requestedItemModel(req.body);
   newRequestedItem.borrowedBy = req.user.user_id;   //the item is requested by the user who created the listing
   try {
-    await requestedItemModel.findById(newRequestedItem._id).populate('borrowedBy'); //How do I populate borrowedBy with the rest of the user's properties?
+    //await requestedItemModel.findById(newRequestedItem._id).populate('borrowedBy'); How do I populate borrowedBy with the rest of the user's properties?
     await newRequestedItem.save();
     res.status(201).send("requested item created successfully");
   } catch (err) {
@@ -67,6 +67,11 @@ export const deleteRequestedItem = async (req, res) => {
       .status(404)
       .json({ message: `No requested item with id: ${id}` });
   }
-  await requestedItemModel.findByIdAndRemove({ _id: id });
-  res.status(201).json({ message: "requested item deleted successfully." });
+  const requestedItem = await requestedItemModel.findById(id);
+  if (req.user.user_id === requestedItem.borrowedBy) {        // users can only delete items they have created themselves
+    await requestedItemModel.findByIdAndRemove(id);
+    res.status(201).json({ message: "requested item deleted successfully." });
+  } else {
+      res.status(403).send("You are not authorized to delete this item");
+  };
 };
