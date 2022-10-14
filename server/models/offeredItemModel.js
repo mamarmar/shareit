@@ -27,13 +27,20 @@ const offeredItemSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
-        borrowedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], //Array of users because multiple users might borrow the offered item,
-        reservedFromDate: {
-            type: Date
-        },
-        reservedToDate: {
-            type: Date
-        }
+        borrowedBy: [ //array because multiple users might borrow the same item on different dates
+            {
+                user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+                reservedFromDate: {type: Date, required: [true, 'Date is required']},
+                reservedToDate: {type: Date, required: [true, 'Date is required']}
+            }
+        ],
+        // isAvailable: [
+        //     {
+        //         state: {type:Boolean, default: false},
+        //         fromDate: Date,
+        //         toDate: Date
+        //     }
+        // ]
     }
 );
 
