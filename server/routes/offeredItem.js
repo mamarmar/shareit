@@ -1,5 +1,5 @@
 import express from "express";
-import { getOfferedItems, getOfferedItemsBySearch, getOfferedItem, createOfferedItem, deleteOfferedItem, requestOfferedItem } from "../controllers/offeredItem.js";
+import { getOfferedItems, getOfferedItemsBySearch, getOfferedItem, createOfferedItem, deleteOfferedItem, reserveOfferedItem } from "../controllers/offeredItem.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -15,6 +15,6 @@ router.post("/form", auth, createOfferedItem);
 
 router.delete("/:id", auth, deleteOfferedItem);
 
-router.patch("/:id", auth, requestOfferedItem);
+router.patch("/:id", auth, reserveOfferedItem);
 
 export default router;

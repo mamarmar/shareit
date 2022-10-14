@@ -67,10 +67,10 @@ export const deleteOfferedItem = async (req, res) => {
   };
 };
 
-//Request offered item
-export const requestOfferedItem = async(req, res) => {
+//Reserve offered item
+export const reserveOfferedItem = async(req, res) => {
   const { id } = req.params;
-  const { reservedFromDate, reservedToDate } = req.body;
+  const { reservedFromDate, reservedToDate } = req.body; //the dates that the user wants to reserve the item for
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ message: `No offered item with id: ${id}` });
   }
@@ -81,21 +81,18 @@ export const requestOfferedItem = async(req, res) => {
     borrowing.user = req.user.user_id; //current user
     borrowing.reservedFromDate = new Date(reservedFromDate);
     borrowing.reservedToDate = new Date(reservedToDate);
-    //Check if dates are already taken
+    //Check if dates are already taken by other user
     for (const borrowingObj of offeredItem.borrowedBy) {
-      console.log(borrowingObj.reservedFromDate, borrowing.reservedFromDate);
-      if (borrowing.reservedFromDate == borrowingObj.reservedFromDate 
-        || borrowing.reservedToDate == borrowingObj.reservedToDate) {
-          console.log('dates are the same');
-          
+      if ( (borrowing.reservedFromDate.toDateString() ===  borrowingObj.reservedFromDate.toDateString() || borrowing.reservedToDate.toDateString() === borrowingObj.reservedFromDate.toDateString()) //dates are exactly the same
+      || (borrowing.reservedFromDate <  borrowingObj.reservedFromDate && borrowing.reservedToDate >= borrowingObj.reservedFromDate)  // fromDate is earlier but toDate falls within or after dates that item is reserved by other user
+      || (borrowing.reservedFromDate <= borrowingObj.reservedToDate && borrowing.reservedToDate > borrowingObj.reservedToDate)) {     //toDate is later but fromDate falls within or before dates that item is reserved by other user
           return res.status(409).send("These dates are not available. Please select different dates");
-          
         } 
     }
     //If dates are not taken, push the object to the offeredItem.borrowedBy array
     offeredItem.borrowedBy.push(borrowing);
     await offeredItem.save();
-    res.status(201).send(`Item requested and reserved successfully: ${offeredItem}`);
+    res.status(201).send(`Item reserved successfully: ${offeredItem}`);
   }catch(err) {
     res.status(400).json({ message: err.message });
   }
