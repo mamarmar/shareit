@@ -24,9 +24,8 @@ const offeredItemSchema = new mongoose.Schema(
         },
         itemImages: [String],
         offeredBy: {
-            // type: mongoose.Schema.Types.ObjectId,
-            // ref: 'User'
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
         },
         borrowedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], //Array of users because multiple users might borrow the offered item,
         reservedFromDate: {

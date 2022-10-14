@@ -4,7 +4,7 @@ import offeredItemModel from "../models/offeredItemModel.js";
 //Get all offered items
 export const getOfferedItems = async (req, res) => {
   try {
-    const offeredItems = await offeredItemModel.find();
+    const offeredItems = await offeredItemModel.find().populate('offeredBy');
     res.status(201).json({ data: offeredItems });
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -22,13 +22,7 @@ export const getOfferedItemsBySearch = async (req, res) => {
         filtersArr.push(thisFilter);
       }
     }
-    const filteredOfferedItems = await offeredItemModel.aggregate([
-      {
-        $match: {
-          $and: filtersArr,
-        },
-      },
-    ]);
+    const filteredOfferedItems = await offeredItemModel.find(req.query).populate('offeredBy');
     res.status(201).json({ data: filteredOfferedItems });
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -39,7 +33,7 @@ export const getOfferedItemsBySearch = async (req, res) => {
 export const getOfferedItem = async (req, res) => {
   const { id } = req.params;
   try {
-    const offeredItem = await offeredItemModel.find({ _id: id });
+    const offeredItem = await offeredItemModel.find({ _id: id }).populate('offeredBy');
     res.status(201).json({ data: offeredItem });
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -49,7 +43,7 @@ export const getOfferedItem = async (req, res) => {
 //Create new offered item
 export const createOfferedItem = async (req, res) => {
   const newOfferedItem = new offeredItemModel(req.body);
-  newOfferedItem.offeredBy = req.user.user_id;   //the item is offered by the user who created the listing
+  newOfferedItem.offeredBy = req.user.user_id;   //the item is offered by the user who created the listing (current user)
   try {
     await newOfferedItem.save();
     res.status(201).send( `Offered item created successfully: ${newOfferedItem}`);
@@ -65,7 +59,7 @@ export const deleteOfferedItem = async (req, res) => {
     return res.status(404).json({ message: `No offered item with id: ${id}` });
   }
   const offeredItem = await offeredItemModel.findById(id);
-  if (req.user.user_id === offeredItem.offeredBy) {        // users can only delete items they have created themselves
+  if (req.user.user_id === offeredItem.offeredBy.valueOf()) {        // users can only delete items they have created themselves
     await offeredItemModel.findByIdAndRemove(id);
     res.status(201).json({ message: "Offered item deleted successfully." });
 } else {
