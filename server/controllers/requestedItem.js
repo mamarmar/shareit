@@ -84,6 +84,10 @@ export const offerRequestedItem = async (req, res) => {
     const requestedItem = await requestedItemModel.findById(id);
     requestedItem.offeredBy = req.user.user_id; //current user
     await requestedItem.save();
+    //Find current user and update itemsLent array
+    const user = await userModel.findById(req.user.user_id);
+    user.itemsLent.push(requestedItem);
+    await user.save();
     res.status(201).send(`Item offered successfully: ${requestedItem}`);
   }catch(err) {
     res.status(400).json({ message: err.message });
