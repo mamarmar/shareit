@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import requestedItemModel from "../models/requestedItemModel.js";
+import userModel from "../models/userModel.js";
 
 //Get all requested items
 export const getRequestedItems = async (req, res) => {
@@ -46,6 +47,10 @@ export const createRequestedItem = async (req, res) => {
   newRequestedItem.borrowedBy = req.user.user_id;   //the item is requested by the user who created the listing (current user)
   try {
     await newRequestedItem.save();
+    //Find current user and update itemsBorrowed array
+    const user = await userModel.findById(req.user.user_id);
+    user.itemsBorrowed.push(newRequestedItem);
+    await user.save();
     res.status(201).send("requested item created successfully");
   } catch (err) {
     res.status(400).json({ message: err.message });

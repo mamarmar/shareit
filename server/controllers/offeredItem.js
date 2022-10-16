@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import offeredItemModel from "../models/offeredItemModel.js";
+import userModel from "../models/userModel.js";
 
 //Get all offered items
 export const getOfferedItems = async (req, res) => {
@@ -92,6 +93,10 @@ export const reserveOfferedItem = async(req, res) => {
     //If dates are not taken, push the object to the offeredItem.borrowedBy array
     offeredItem.borrowedBy.push(borrowing);
     await offeredItem.save();
+    //Find current user and update itemsBorrowed array
+    const user = await userModel.findById(req.user.user_id);
+    user.itemsBorrowed.push(offeredItem);
+    await user.save();
     res.status(201).send(`Item reserved successfully: ${offeredItem}`);
   }catch(err) {
     res.status(400).json({ message: err.message });
