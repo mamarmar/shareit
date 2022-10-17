@@ -1,3 +1,4 @@
+import axios from "axios";
 //MUI
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
@@ -18,14 +19,39 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const [formData, setFormData] = React.useState({
+    firstName:"",
+    lastName:"",
+    email:"",
+    password:"",
+    country:"",
+    city:"",
+    address:"",
+    profilePic:""
+  })
+
+  //Handle change of multiple inputs
+  function handleChange(e) {
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        [e.target.name]: e.target.value,
+      };
     });
-  };
+  }
+
+  //Create new user  when form is submitted
+async function handleSubmit(event) {
+    event.preventDefault();
+      try {
+        console.log(formData);
+        const res = await axios.post(`http://localhost:5000/signup`, formData);
+        console.log(res.config.data);
+      }catch(err) {
+        console.log("Could not send input");
+        console.log(err);
+      }
+}
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,11 +82,13 @@ export default function SignUp() {
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
+                  value={formData.firstName}
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -70,7 +98,9 @@ export default function SignUp() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
+                  value={formData.lastName}
                   autoComplete="family-name"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -80,7 +110,9 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  value={formData.email}
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -88,20 +120,24 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
+                  value={formData.password}
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="country"
                   name="country"
+                  value={formData.country}
                   required
                   fullWidth
                   id="country"
                   label="Country"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -111,7 +147,9 @@ export default function SignUp() {
                   id="city"
                   label="City"
                   name="city"
+                  value={formData.city}
                   autoComplete="city"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -119,9 +157,11 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="address"
+                  value={formData.address}
                   label="Address"
                   id="address"
                   autoComplete="address"
+                  onChange={handleChange}
                 />
               </Grid>
 
@@ -129,14 +169,29 @@ export default function SignUp() {
                 <Stack direction="row" alignItems="center" spacing={2}>
                   <Button variant="contained" component="label">
                     Profile Picture
-                    <input hidden accept="image/*" multiple type="file" />
+                    <input 
+                      hidden
+                      accept="image/*"
+                      multiple
+                      type="file"
+                      name="profilePic"
+                      value={formData.profilePic}
+                      onChange={handleChange}
+                    />
                   </Button>
                   <IconButton
                     color="primary"
                     aria-label="upload profile picture"
                     component="label"
                   >
-                    <input accept="image/*" type="file" />
+                    <input
+                      accept="image/*"
+                      multiple
+                      type="file"
+                      name="profilePic"
+                      value={formData.profilePic}
+                      onChange={handleChange}
+                    />
                     <PhotoCamera />
                   </IconButton>
                 </Stack>

@@ -1,3 +1,4 @@
+import axios from "axios";
 //MUI
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -16,14 +17,35 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 
 export default function OfferedItemForm() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const [formData, setFormData] = React.useState({
+    itemName:"",
+    category:"",
+    description:"",
+    condition:"",
+    city:"",
+    itemImages:""
+  })
+
+  //Handle change of multiple inputs
+  function handleChange(e) {
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        [e.target.name]: e.target.value,
+      };
     });
-  };
+  }
+
+  //Create new offered item when form is submitted
+async function handleSubmit() {
+      try {
+        const res = await axios.post(`http://localhost:5000/offereditems/form`, formData);
+        console.log(res);
+      }catch(err) {
+        console.log("Could not create offered item");
+        console.log(err);
+      }
+}
 
   return (
     <ThemeProvider theme={theme}>
@@ -51,11 +73,13 @@ export default function OfferedItemForm() {
                 <TextField
                   autoComplete="item-name"
                   name="itemName"
+                  value={formData.itemName}
                   required
                   fullWidth
                   id="itemName"
                   label="What item?"
                   autoFocus
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -65,7 +89,9 @@ export default function OfferedItemForm() {
                   id="category"
                   label="Category"
                   name="category"
+                  value={formData.category}
                   autoComplete="category"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -75,7 +101,9 @@ export default function OfferedItemForm() {
                   id="description"
                   label="Description"
                   name="description"
+                  value={formData.description}
                   autoComplete="description"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -83,9 +111,11 @@ export default function OfferedItemForm() {
                   required
                   fullWidth
                   name="condition"
+                  value={formData.condition}
                   label="Condition"
                   id="condition"
                   autoComplete="condition"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,9 +123,11 @@ export default function OfferedItemForm() {
                   required
                   fullWidth
                   name="city"
+                  value={formData.city}
                   label="City"
                   id="city"
                   autoComplete="city"
+                  onChange={handleChange}
                 />
               </Grid>
 
@@ -103,14 +135,29 @@ export default function OfferedItemForm() {
                 <Stack direction="row" alignItems="center" spacing={2}>
                   <Button variant="contained" component="label">
                     Item Image
-                    <input hidden accept="image/*" multiple type="file" />
+                    <input 
+                    hidden
+                    accept="image/*"
+                    multiple
+                    type="file"
+                    name="itemImages"
+                    value={formData.itemImages}
+                    onChange={handleChange}
+                    />
                   </Button>
                   <IconButton
                     color="primary"
                     aria-label="upload profile picture"
                     component="label"
                   >
-                    <input accept="image/*" type="file" />
+                    <input 
+                      accept="image/*"
+                      multiple
+                      type="file"
+                      name="itemImages"
+                      value={formData.itemImages}
+                      onChange={handleChange}
+                    />
                     <PhotoCamera />
                   </IconButton>
                 </Stack>
