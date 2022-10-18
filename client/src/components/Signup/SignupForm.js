@@ -40,18 +40,20 @@ export default function SignUp() {
     });
   }
 
-  //Create new user  when form is submitted
+  // Create new user  when form is submitted
 async function handleSubmit(event) {
     event.preventDefault();
       try {
-        console.log(formData);
-        const res = await axios.post(`http://localhost:5000/signup`, formData);
-        console.log(res.config.data);
+        const res = await axios.post(`http://localhost:5000/user/signup`, formData);
+        const token = res.data.token;
+        localStorage.setItem('shareItToken', token);
       }catch(err) {
         console.log("Could not send input");
         console.log(err);
       }
 }
+
+
 
   return (
     <ThemeProvider theme={theme}>

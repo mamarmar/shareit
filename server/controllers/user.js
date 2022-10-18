@@ -64,6 +64,7 @@ export const signup = async (req, res) => {
     //Save user token
     user.token = token;
     //Return new user
+    console.log(user);
     res.status(201).json(user);
   } catch (err) {
     res.status(401).send(err);
