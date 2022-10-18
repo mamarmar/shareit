@@ -1,3 +1,10 @@
 body {
     margin: 0;
 }
+
+.offered-item-grid {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+}

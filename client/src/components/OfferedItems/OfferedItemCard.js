@@ -12,7 +12,7 @@ export default function OfferedItemCard(props) {
         <CardMedia
           component="img"
           height="140"
-          image="../.././public/colorful-paper-image.jpeg"
+          image={require("../../images/colorful-paper.jpeg")}
           alt="colorful paper"
         />
         <CardContent>
