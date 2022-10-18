@@ -3,7 +3,7 @@ import axios from "axios";
 //Context
 import { AuthContext } from "../User/AuthContext";
 //React Router
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //MUI
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -35,7 +35,6 @@ const Header = () => {
     itemName: "",
   });
   const { handleLogOut } = React.useContext(AuthContext);
-  // const [offeredItems, setOfferedItems] = React.useState([]);
 
   //Handle change of multiple inputs
   function handleChange(e) {
@@ -64,7 +63,6 @@ const Header = () => {
     handleLogOut();
     handleCloseUserMenu();
   }
-
 
   //MUI
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -153,13 +151,14 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
+                <Link to={page.linkTo} style={{textDecoration:'none', color:'black'}}>
                 <MenuItem
                   key={page.title}
                   onClick={handleCloseNavMenu}
-                  href={page.linkTo}
                 >
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -183,14 +182,16 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page.title}
-                onClick={handleCloseNavMenu}
-                href={page.linkTo}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page.title}
-              </Button>
+              <Link to={page.linkTo} style={{textDecoration:'none'}}>
+                <Button
+                  key={page.title}
+                  onClick={handleCloseNavMenu}
+                  href={page.linkTo}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.title}
+                </Button>
+              </Link>
             ))}
           </Box>
 
