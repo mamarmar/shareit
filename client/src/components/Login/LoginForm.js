@@ -1,3 +1,5 @@
+//Context
+import { AuthContext } from "../User/AuthContext";
 //MUI 
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -18,14 +20,27 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [formData, setFormData] = React.useState({
+    email:"",
+    password:""
+  })
+  const { handleLogin } = React.useContext(AuthContext);
+
+  //Handle change of multiple inputs
+  function handleChange(e) {
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        [e.target.name]: e.target.value,
+      };
     });
-  };
+  }
+
+  // Log in user when form is submitted
+async function handleSubmit(event) {
+  event.preventDefault();
+  handleLogin(formData);
+}
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,18 +68,22 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
+              value={formData.email}
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
+              value={formData.password}
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

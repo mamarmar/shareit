@@ -1,5 +1,7 @@
-import * as React from "react";
+import React from "react";
 import axios from "axios";
+//Context
+import { AuthContext } from "../User/AuthContext";
 //React Router
 import { Link } from "react-router-dom";
 //MUI
@@ -27,17 +29,12 @@ const pages = [
     linkTo: "/requested/new",
   },
 ];
-const settings = [
-  "Profile",
-  "Browse Offered Items",
-  "Browse Requested Items",
-  "Logout",
-];
 
-const VisitorHeader = () => {
+const Header = () => {
   const [input, setInput] = React.useState({
     itemName: "",
   });
+  const { handleLogOut } = React.useContext(AuthContext);
   // const [offeredItems, setOfferedItems] = React.useState([]);
 
   function handleChange(e) {
@@ -50,7 +47,7 @@ const VisitorHeader = () => {
     });
   }
 
-  // *2* Using the query parameters
+  // Search for item based on item name (using the query parameters)
   function handleSubmit(e) {
     e.preventDefault();
     const itemName = input.itemName;
@@ -62,6 +59,11 @@ const VisitorHeader = () => {
       .catch((err) => console.error(err));
   }
 
+  //Log user out
+  function logOut() {
+    handleLogOut();
+    handleCloseUserMenu();
+  }
 
 
   //MUI
@@ -214,11 +216,18 @@ const VisitorHeader = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-              ))}
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Browse Offered Items</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Browse Requested Items</Typography>
+                </MenuItem>
+                <MenuItem onClick={logOut}>
+                  <Typography textAlign="center">Log out</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -226,4 +235,4 @@ const VisitorHeader = () => {
     </AppBar>
   );
 };
-export default VisitorHeader;
+export default Header;
