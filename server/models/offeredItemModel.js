@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const offeredItemSchema = new mongoose.Schema(
     {
-        name: {
+        itemName: {
             type: String,
             required: [true, 'Item name is required']
         },

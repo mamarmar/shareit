@@ -11,7 +11,7 @@ function OfferedItemGrid() {
         return (
             <OfferedItemCard 
                 key={item._id}
-                itemName={item.name}
+                itemName={item.itemName}
                 itemImages={item.itemImages}
             />
         )

@@ -37,15 +37,22 @@ export default function OfferedItemForm() {
   }
 
   //Create new offered item when form is submitted
-async function handleSubmit() {
-      try {
-        const res = await axios.post(`http://localhost:5000/offereditems/form`, formData);
-        console.log(res);
-      }catch(err) {
+async function handleSubmit(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("shareItToken");
+    let config = {
+      headers: {
+        'x-access-token': token
+      }
+    };
+    try {
+      const res = await axios.post(`http://localhost:5000/offereditems/form`, formData, config);
+      console.log(res);
+    }catch(err) {
         console.log("Could not create offered item");
         console.log(err);
-      }
-}
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
