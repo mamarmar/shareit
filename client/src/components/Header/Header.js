@@ -37,8 +37,8 @@ const Header = () => {
   const { handleLogOut } = React.useContext(AuthContext);
   // const [offeredItems, setOfferedItems] = React.useState([]);
 
+  //Handle change of multiple inputs
   function handleChange(e) {
-    console.log(input);
     setInput((prevInput) => {
       return {
         ...prevInput,

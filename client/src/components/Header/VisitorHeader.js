@@ -27,7 +27,6 @@ const VisitorHeader = () => {
     try {
       const res = await axios.get(`http://localhost:5000/offereditems/visitor`);
       setOfferedItems(res.data.data);
-      console.log(res.data.data);
     } catch (err) {
       console.log("Could not fetch offered items");
       console.log(err);
