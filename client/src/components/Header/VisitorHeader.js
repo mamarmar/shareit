@@ -15,8 +15,8 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
 
-const VisitorHeader = () => {
-  const [offeredItems, setOfferedItems] = React.useState([]);
+const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
+  
 
   React.useEffect(() => {
     handleClick();

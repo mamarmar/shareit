@@ -32,7 +32,7 @@ const pages = [
   },
 ];
 
-const Header = () => {
+const Header = ({ offeredItems, setOfferedItems }) => {
   const [input, setInput] = React.useState({
     itemName: "",
   });
@@ -42,7 +42,7 @@ const Header = () => {
 
   React.useEffect(() => {
     handleProfileClick();
-  },[])
+  }, []);
 
   //Handle change of multiple inputs
   function handleChange(e) {
@@ -71,16 +71,28 @@ const Header = () => {
     const token = localStorage.getItem("shareItToken");
     const decodedToken = decode(token);
     let config = {
-      headers: { 'x-access-token': token }
-  };
+      headers: { "x-access-token": token },
+    };
     try {
-        const res = await axios.get(`http://localhost:5000/user/${decodedToken.user_id}`, config);
-        setCurrentUser(res.data);
-    } catch(err) {
-        console.log({error: err});
+      const res = await axios.get(
+        `http://localhost:5000/user/${decodedToken.user_id}`,
+        config
+      );
+      setCurrentUser(res.data);
+    } catch (err) {
+      console.log({ error: err });
     }
-      
-      
+  }
+
+  //Get all offered items when menu item is clicked
+  async function getAllOfferedItems() {
+    try {
+      const res = await axios.get(`http://localhost:5000/offereditems/visitor`);
+      setOfferedItems(res.data.data);
+    } catch (err) {
+      console.log("Could not fetch offered items");
+      console.log(err);
+    }
   }
 
   //Log user out
@@ -130,19 +142,15 @@ const Header = () => {
             ShareIt
           </Typography>
 
-          <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          >
+          <Box component="form" noValidate onSubmit={handleSubmit}>
             <TextField
-            fullWidth
-            id="itemName"
-            name="itemName"
-            value={input.itemName}
-            placeholder='Search offered items...'
-            autofocus
-            onChange={handleChange}
+              fullWidth
+              id="itemName"
+              name="itemName"
+              value={input.itemName}
+              placeholder="Search offered items..."
+              autofocus
+              onChange={handleChange}
             />
           </Box>
 
@@ -176,13 +184,13 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <Link to={page.linkTo} style={{textDecoration:'none', color:'black'}}>
-                <MenuItem
-                  key={page.title}
-                  onClick={handleCloseNavMenu}
+                <Link
+                  to={page.linkTo}
+                  style={{ textDecoration: "none", color: "black" }}
                 >
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
+                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.title}</Typography>
+                  </MenuItem>
                 </Link>
               ))}
             </Menu>
@@ -207,7 +215,7 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={page.linkTo} style={{textDecoration:'none'}}>
+              <Link to={page.linkTo} style={{ textDecoration: "none" }}>
                 <Button
                   key={page.title}
                   onClick={handleCloseNavMenu}
@@ -242,21 +250,33 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link to={`/user/${currentUser._id}`} state={currentUser} onClick={handleProfileClick} style={{textDecoration:"none", color:"black"}}>
-              <MenuItem onClick={handleCloseUserMenu}>
+              <Link
+                to={`/user/${currentUser._id}`}
+                state={currentUser}
+                onClick={handleProfileClick}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
               </Link>
-                
+              <Link to="/offered/visitor" style={{textDecoration:"none", color:"black"}} state={offeredItems} onClick={getAllOfferedItems}>
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Browse Offered Items</Typography>
+                  <Typography textAlign="center">
+                    Browse Offered Items
+                  </Typography>
                 </MenuItem>
+              </Link>
+              <Link>
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Browse Requested Items</Typography>
+                  <Typography textAlign="center">
+                    Browse Requested Items
+                  </Typography>
                 </MenuItem>
-                <MenuItem onClick={logOut}>
-                  <Typography textAlign="center">Log out</Typography>
-                </MenuItem>
+              </Link>
+              <MenuItem onClick={logOut}>
+                <Typography textAlign="center">Log out</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

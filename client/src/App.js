@@ -22,14 +22,14 @@ import Footer from "./components/Footer/Footer";
 import UserProfile from "./components/User/UserProfile";
 
 function App() {
-  
+  const [offeredItems, setOfferedItems] = React.useState([]);
   return (
     <div className="App">
        {localStorage.getItem("shareItToken")
        ? <Auth>
-          <Header />
+          <Header offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>
        </Auth>
-      : <VisitorHeader />}
+      : <VisitorHeader offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>}
       <Routes>
         <Route path="/" element={<Homepage />}/>
         <Route path="/about" element={<About />}/>
