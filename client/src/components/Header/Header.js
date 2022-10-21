@@ -4,6 +4,8 @@ import axios from "axios";
 import { AuthContext } from "../User/AuthContext";
 //React Router
 import { Link } from "react-router-dom";
+//Decode JWT
+import decode from "jwt-decode";
 //MUI
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -34,7 +36,13 @@ const Header = () => {
   const [input, setInput] = React.useState({
     itemName: "",
   });
+  const [currentUser, setCurrentUser] = React.useState({});
+
   const { handleLogOut } = React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    handleProfileClick();
+  },[])
 
   //Handle change of multiple inputs
   function handleChange(e) {
@@ -56,6 +64,23 @@ const Header = () => {
         console.log(res.data);
       })
       .catch((err) => console.error(err));
+  }
+
+  //Go to user profile
+  async function handleProfileClick() {
+    const token = localStorage.getItem("shareItToken");
+    const decodedToken = decode(token);
+    let config = {
+      headers: { 'x-access-token': token }
+  };
+    try {
+        const res = await axios.get(`http://localhost:5000/user/${decodedToken.user_id}`, config);
+        setCurrentUser(res.data);
+    } catch(err) {
+        console.log({error: err});
+    }
+      
+      
   }
 
   //Log user out
@@ -217,9 +242,12 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem onClick={handleCloseUserMenu}>
+              <Link to={`/user/${currentUser._id}`} state={currentUser} onClick={handleProfileClick} style={{textDecoration:"none", color:"black"}}>
+              <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
+              </Link>
+                
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Browse Offered Items</Typography>
                 </MenuItem>
