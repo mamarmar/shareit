@@ -14,12 +14,8 @@ import SignupForm from "./components/Signup/SignupForm";
 import LoginForm from "./components/Login/LoginForm";
 import OfferedItemForm from "./components/OfferedItems/OfferedItemForm";
 import OfferedItemGrid from "./components/OfferedItems/OfferedItemGrid";
-import OfferedItemPage from "./components/OfferedItems/OfferedItemPage";
-import RequestedItemForm from "./components/RequestedItems/RequestedItemForm";
-import RequestedItemGrid from "./components/RequestedItems/RequestedItemGrid";
-import RequestedItemPage from "./components/RequestedItems/RequestedItemPage";
+import RequestedItemForm from "./components/RequestedItems/RequestedItemForm"
 import Footer from "./components/Footer/Footer";
-import UserProfile from "./components/User/UserProfile";
 
 function App() {
   
@@ -40,13 +36,21 @@ function App() {
             <LoginForm />
           </Auth>
         }/>
-        <Route path="/offered/new" element={<OfferedItemForm />}/>
-        <Route path="/offered/visitor" element={<OfferedItemGrid />}/>
-        <Route path="/offered/:id" element={<OfferedItemPage />}/>
-        <Route path="/requested/new" element={<RequestedItemForm />}/>
-        <Route path="/requested/" element={<RequestedItemGrid />}/>
-        <Route path="/requested/:id" element={<RequestedItemPage />}/>
-        <Route path="/user/:id" element={<UserProfile />} />
+        <Route path="/offered/new" element={
+          <Auth>
+            <OfferedItemForm />
+          </Auth>
+        }/>
+        <Route path="/offered/visitor" element={
+          <Auth>
+            <OfferedItemGrid />
+          </Auth>
+        }/>
+        <Route path="/requested/new" element={
+          <Auth>
+            <RequestedItemForm />
+          </Auth>
+        }/>
       </Routes>
       <Footer />
     </div>

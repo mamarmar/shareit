@@ -1,13 +1,16 @@
 import React from "react";
 // import axios from "axios"
 import OfferedItemCard from "./OfferedItemCard";
-import { useLocation } from "react-router-dom";
+//Context
+import { OfferedItemContext } from "../../context/OfferedItemContext";
 
-function OfferedItemGrid() {
-    const location = useLocation()
+function VisitorOfferedItemGrid() {
+    const { offeredItems } = React.useContext(OfferedItemContext);
+
+    console.log(offeredItems);
 
     //Map over the incoming data and create an OfferedItemCard for every document
-    const allOfferedItems = location.state.map(item => {
+    const allOfferedItems = offeredItems.map(item => {
         return (
             <OfferedItemCard 
                 key={item._id}
@@ -17,10 +20,10 @@ function OfferedItemGrid() {
         )
     })
     return (
-        <div className="offered-items-grid">
+        <div className="offered-item-grid">
             {allOfferedItems}
         </div>
     )
 }
 
-export default OfferedItemGrid;
+export default VisitorOfferedItemGrid;
