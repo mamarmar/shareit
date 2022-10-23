@@ -1,12 +1,15 @@
 import React from "react";
 // import axios from "axios"
+//Components
+import FilterNavBar from "./FilterNavBar";
 import RequestedItemCard from "./RequestedItemCard";
+//React Router
 import { useLocation } from "react-router-dom";
 
 function RequestedItemGrid() {
-    const location = useLocation()
+    const location = useLocation();
 
-    //Map over the incoming data and create an RequestedItemCard for every document
+    //Map over the incoming data and create a RequestedItemCard for every document
     const allRequestedItems = location.state.map(item => {
         return (
             <RequestedItemCard 
@@ -17,9 +20,13 @@ function RequestedItemGrid() {
         )
     })
     return (
-        <div className="offered-items-grid">
+        <div>
+            <FilterNavBar requestedItems={location.state} setRequestedItems={location.setState}/>
+            <div className="offered-items-grid">
             {allRequestedItems}
+            </div>
         </div>
+        
     )
 }
 

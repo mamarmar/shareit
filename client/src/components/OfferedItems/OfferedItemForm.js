@@ -37,7 +37,7 @@ export default function OfferedItemForm() {
   }
 
   //Create new offered item when form is submitted
-async function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const token = localStorage.getItem("shareItToken");
     let config = {
@@ -143,13 +143,13 @@ async function handleSubmit(e) {
                   <Button variant="contained" component="label">
                     Item Image
                     <input 
-                    hidden
-                    accept="image/*"
-                    multiple
-                    type="file"
-                    name="itemImages"
-                    value={formData.itemImages}
-                    onChange={handleChange}
+                      hidden
+                      accept="image/*"
+                      multiple
+                      type="file"
+                      name="itemImages"
+                      value={formData.itemImages}
+                      onChange={handleChange}
                     />
                   </Button>
                   <IconButton
