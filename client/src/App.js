@@ -23,11 +23,18 @@ import UserProfile from "./components/User/UserProfile";
 
 function App() {
   const [offeredItems, setOfferedItems] = React.useState([]);
+  const [requestedItems, setRequestedItems] = React.useState([]);
+
   return (
     <div className="App">
        {localStorage.getItem("shareItToken")
        ? <Auth>
-          <Header offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>
+          <Header 
+            offeredItems={offeredItems}
+            setOfferedItems={setOfferedItems}
+            requestedItems={requestedItems}
+            setRequestedItems={setRequestedItems}
+          />
        </Auth>
       : <VisitorHeader offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>}
       <Routes>

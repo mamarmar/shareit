@@ -32,7 +32,7 @@ const pages = [
   },
 ];
 
-const Header = ({ offeredItems, setOfferedItems }) => {
+const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedItems }) => {
   const [input, setInput] = React.useState({
     itemName: "",
   });
@@ -42,6 +42,14 @@ const Header = ({ offeredItems, setOfferedItems }) => {
 
   React.useEffect(() => {
     handleProfileClick();
+  }, []);
+
+  React.useEffect(() => {
+    getAllOfferedItems();
+  }, []);
+
+  React.useEffect(() => {
+    getAllRequestedItems();
   }, []);
 
   //Handle change of multiple inputs
@@ -92,6 +100,20 @@ const Header = ({ offeredItems, setOfferedItems }) => {
     } catch (err) {
       console.log("Could not fetch offered items");
       console.log(err);
+    }
+  }
+
+  //Get all requested items when menu item is clicked
+  async function getAllRequestedItems() {
+    const token = localStorage.getItem("shareItToken");
+    let config = {
+      headers: { "x-access-token": token },
+    };
+    try {
+      const res = await axios.get(`http://localhost:5000/requesteditems/`,config);
+      setRequestedItems(res.data.data);
+    } catch (err) {
+      console.log({ error: err });
     }
   }
 
@@ -267,7 +289,7 @@ const Header = ({ offeredItems, setOfferedItems }) => {
                   </Typography>
                 </MenuItem>
               </Link>
-              <Link>
+              <Link to="/requested" style={{textDecoration:"none", color:"black"}} state={requestedItems} onClick={getAllRequestedItems}>
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
                     Browse Requested Items
