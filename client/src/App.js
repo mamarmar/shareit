@@ -51,7 +51,7 @@ function App() {
         <Route path="/offered/visitor" element={<OfferedItemGrid />}/>
         <Route path="/offered/:id" element={<OfferedItemPage />}/>
         <Route path="/requested/new" element={<RequestedItemForm />}/>
-        <Route path="/requested/" element={<RequestedItemGrid />}/>
+        <Route path="/requested/" element={<RequestedItemGrid requestedItems={requestedItems} setRequestedItems={setRequestedItems}/>}/>
         <Route path="/requested/:id" element={<RequestedItemPage />}/>
         <Route path="/user/:id" element={<UserProfile />} />
       </Routes>
