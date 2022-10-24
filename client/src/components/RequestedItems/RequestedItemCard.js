@@ -12,6 +12,10 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 export default function RequestedItemCard(props) {
   const [currentRequestedItem, setCurrentRequestedItem] = React.useState();
 
+  React.useEffect(() => {
+    handleClick();
+  },[]);
+
   //Go to item page
   async function handleClick() {
     const token = localStorage.getItem("shareItToken");
@@ -23,7 +27,7 @@ export default function RequestedItemCard(props) {
         `http://localhost:5000/requesteditems/${props.id}`,
         config
       );
-      setCurrentRequestedItem(res.data.data);
+      setCurrentRequestedItem(res.data.data[0]);
     } catch (err) {
       console.log({ error: err });
     }
@@ -36,6 +40,7 @@ export default function RequestedItemCard(props) {
         to={`/requested/${props.id}`}
         style={{ textDecoration: "none", color: "black" }}
         state={currentRequestedItem}
+        onClick={handleClick}
       >
         <CardMedia
           component="img"
