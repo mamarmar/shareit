@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 //Context
-import { AuthContext } from "../User/AuthContext";
+import { AuthContext } from "../../context/UserContext";
 //React Router
 import { Link } from "react-router-dom";
 //Decode JWT

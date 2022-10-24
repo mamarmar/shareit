@@ -3,7 +3,7 @@ import React from "react";
 //React Router
 import { Route, Routes } from "react-router-dom";
 //Context
-import Auth from "./components/User/AuthContext";
+import Auth from "../src/context/UserContext";
 //Components
 import VisitorHeader from "./components/Header/VisitorHeader";
 import Header from "./components/Header/Header";

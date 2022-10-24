@@ -1,5 +1,5 @@
 //Context
-import { AuthContext } from "../User/AuthContext";
+import { AuthContext } from "../../context/UserContext";
 //MUI 
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
