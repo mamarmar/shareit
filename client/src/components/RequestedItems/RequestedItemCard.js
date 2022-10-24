@@ -11,7 +11,7 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 
 export default function RequestedItemCard(props) {
   const [currentRequestedItem, setCurrentRequestedItem] = React.useState();
-
+  
   React.useEffect(() => {
     handleClick();
   },[]);
@@ -39,8 +39,8 @@ export default function RequestedItemCard(props) {
         component={CardActionArea}
         to={`/requested/${props.id}`}
         style={{ textDecoration: "none", color: "black" }}
-        state={currentRequestedItem}
         onClick={handleClick}
+        state={currentRequestedItem}
       >
         <CardMedia
           component="img"

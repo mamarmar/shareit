@@ -1,12 +1,15 @@
 import React from "react";
 import axios from "axios";
+//Components
+import PopUp from "./PopUp";
 //React Router
 import { Link, useLocation } from "react-router-dom";
 
 const RequestedItemPage = () => {
     const location = useLocation();
     const requestedItem = location.state;
-    console.log(requestedItem)
+
+    const [showPopUp, setShowPopUp] = React.useState(false);
     // const fromDay = requestedItem.fromDate.getDate();
     // const fromMonth = (requestedItem.fromDate.getMonth()) + 1;
     // const fromYear = requestedItem.fromDate.getFullYear();
@@ -16,27 +19,32 @@ const RequestedItemPage = () => {
         visitBorrowerProfile();
     },[])
 
-    //Go to user profile
-  async function visitBorrowerProfile() {
-    const token = localStorage.getItem("shareItToken");
-    let config = {
-      headers: { "x-access-token": token },
-    };
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/user/${requestedItem.borrowedBy._id}`,
-        config
-      );
-      console.log(res.data);
-    } catch (err) {
-      console.log({ error: err });
+    function openPopUp() {
+        setShowPopUp(true)
     }
-  }
+
+    //Go to user profile
+    async function visitBorrowerProfile() {
+        const token = localStorage.getItem("shareItToken");
+        let config = {
+        headers: { "x-access-token": token },
+        };
+        try {
+        await axios.get(
+            `http://localhost:5000/user/${requestedItem.borrowedBy._id}`,config);
+        } catch (err) {
+        console.log({ error: err });
+        }
+    }
+
     return (
         <main className="requested-item-container">
+            {showPopUp && <PopUp setShowPopUp={setShowPopUp} requestedItem={requestedItem}/>}
                     <div className="heading">
                         <h1>{requestedItem.itemName}</h1>
-                        <button>Offer Item</button>
+                        <button
+                            onClick={openPopUp}
+                        >Offer Item</button>
                     </div>
                     <div className="description-container">
                         <h2>Description</h2>
