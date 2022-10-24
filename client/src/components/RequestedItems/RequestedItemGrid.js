@@ -11,7 +11,6 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
         city:"",
         category:""
     });
-
     const [filteredResults, setFilteredResults] = React.useState(false);
 
     const location = useLocation();
@@ -45,7 +44,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
         try {
             const res = await axios.get(`http://localhost:5000/requesteditems/search`, config);
             if (res.data.data.length === 0) {
-                console.log("There are no results matching your search. Please modify your filters and try again.")
+                alert("There are no results matching your search. Please modify your filters and try again.")
             } else {
                 setRequestedItems(res.data.data);
                 setFilteredResults(true);
@@ -64,6 +63,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
         return (
             <RequestedItemCard 
                 key={item._id}
+                id={item._id}
                 itemName={item.itemName}
                 itemImages={item.itemImages}
             />
@@ -74,6 +74,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
         return (
             <RequestedItemCard 
                 key={item._id}
+                id={item._id}
                 itemName={item.itemName}
                 itemImages={item.itemImages}
             />

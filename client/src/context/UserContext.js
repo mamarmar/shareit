@@ -13,6 +13,7 @@ function Auth({ children }) {
             const token = res.data.user.token;
             localStorage.setItem('shareItToken', token);
             navigate("/requested/new");
+            window.location.reload();
         }catch(err) {
             console.log(err);
         }
@@ -21,6 +22,7 @@ function Auth({ children }) {
     const handleLogOut = () => {
         localStorage.clear()
         navigate("login");
+        window.location.reload();
     };
 
     return (
