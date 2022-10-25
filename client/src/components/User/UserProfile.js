@@ -1,10 +1,41 @@
 import React from "react";
+import axios from "axios";
+//Components
+import RequestedItemCard from "../RequestedItems/RequestedItemCard";
+// import OfferedItemCard from "../OfferedItems/OfferedItemCard";
+//React Router
 import { useLocation } from "react-router-dom";
 
 const UserProfile = () => {
+    // const [borrowedItems, setBorrowedItems]=React.useState([]);
     const location = useLocation();
 
     const user = location.state;
+
+    // React.useEffect(() => {
+    //     getBorrowedItems();
+    // },[]);
+    // console.log(user.itemsBorrowed[0]);
+
+    // function getBorrowedItems() {
+    //     const token = localStorage.getItem("shareItToken");
+    //     let config = {
+    //         headers: { "x-access-token": token },
+    //     };
+    //     try {
+    //         user.itemsBorrowed.map(async (item) => {
+    //             const borrowedItem = await axios.get(`http://localhost:5000/requesteditems/${item}`,config);
+    //             setBorrowedItems(prevItems => {
+    //                 return [
+    //                     ...prevItems,
+    //                     borrowedItem
+    //                 ]
+    //             })
+    //         })
+    //     }catch(err) {
+    //         console.log(err);
+    //     }
+    // }
 
     const cardSlider = React.useRef();
 
@@ -28,7 +59,13 @@ const UserProfile = () => {
                     <h3>I have borrowed</h3>
                     <div className="card-slider" ref={cardSlider}>
                     {user.itemsBorrowed.map(item=> {
-                            return <div className="slider-item">Item Card</div>
+                            return <RequestedItemCard 
+                                        className="slider-item"
+                                        key={item._id}
+                                        id={item._id}
+                                        itemName={item.itemName}
+                                        itemImages={item.itemImages}
+                                    />
                         })}
                     </div>
                 </div>
