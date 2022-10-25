@@ -1,15 +1,28 @@
 import axios from "axios";
 import React from "react";
+//Components
+import DeletePopUp from "./DeletePopUp";
 //React Router
 import { useLocation, Link } from "react-router-dom";
+//Decode JWT
+import decode from "jwt-decode";
 
 const OfferedItemPage = () => {
     const location = useLocation();
     const offeredItem = location.state;
 
+    const [showDeletePopUp, setShowDeletePopUp] = React.useState(false);
+
+    const lenderId = offeredItem.offeredBy._id;
+    const currentUserId = decode(localStorage.getItem("shareItToken")).user_id;
+
     React.useEffect(() => {
         visitLenderProfile();
     });
+
+    function openDeletePopUp() {
+        setShowDeletePopUp(true);
+    }
 
     //Go to user profile
     async function visitLenderProfile() {
@@ -27,6 +40,7 @@ const OfferedItemPage = () => {
 
     return (
         <main className="offered-item-container">
+            {showDeletePopUp && <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} offeredItem={offeredItem} currentUserId={currentUserId}/>}
             <div className="images-container">
                 <div className="main-image-container">
                     <img alt="table" src={require("../../images/table-image.jpeg")}/>
@@ -79,7 +93,17 @@ const OfferedItemPage = () => {
                         </div>
                     </div>
                 </div>
-                <button>Request Item</button>
+                {lenderId === currentUserId ? 
+                        <button
+                            onClick={openDeletePopUp}
+                        >
+                            Delete Item
+                        </button> :
+                        <button
+                        >
+                            Request Item
+                        </button>
+                        }
             </div>
         </main>
     )
