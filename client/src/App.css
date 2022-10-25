@@ -160,9 +160,95 @@
 /* Pop-up */
 
 .pop-up {
-    width: 40vw;
-    height: 40vh;
-    background-color: rgba(255,255,255, .2)
+    position: absolute;
+    right: 35%;
+    left: 35%;
+    top: 10em;
+    width: 30vw;
+    min-width: 20em;
+    height: 50vh;
+    min-height: 23em;
+    background-color: rgba(255,255,255, .9);
+    border-radius: 1.5em;
+    box-shadow: .4em .5em 1em lightgrey;
+}
+
+.close-pop-up {
+    position: absolute;
+    text-align: end;
+    right: 1em;
+    top: .5em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pop-up h1 {
+    margin-top: 1em;
+    font-size: 1.5em;
+    text-align: center;
+}
+.pop-up form {
+    display: flex;
+    flex-direction: column;
+    margin-top: .5em;
+    padding: 2em;
+    max-height: 20em;
+}
+
+.pop-up textarea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 12em;
+    max-height: 16em;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.pop-up button {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    border: none;
+    border-radius: .3em;
+    padding: .3em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* Delete Pop-up */
+.delete-pop-up {
+    position: absolute;
+    right: 35%;
+    left: 35%;
+    top: 10em;
+    width: 35vw;
+    min-width: 25em;
+    height: 20vh;
+    background-color: rgba(255,255,255, .9);
+    border-radius: 1.5em;
+    box-shadow: .4em .5em 1em lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+}
+
+.delete-pop-up h1 {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.delete-pop-up .button-container {
+    display: flex;
+    gap: 2em;
+}
+
+.delete-pop-up button {
+    border: none;
+    border-radius: .3em;
+    padding: .5em;
+    font-size: 1em;
+    cursor: pointer;
 }
 
 /* User Profile */

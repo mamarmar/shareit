@@ -2,18 +2,25 @@ import React from "react";
 import axios from "axios";
 //Components
 import PopUp from "./PopUp";
+import DeletePopUp from "./DeletePopUp";
 //React Router
 import { Link, useLocation } from "react-router-dom";
+//Decode JWT
+import decode from "jwt-decode";
 
 const RequestedItemPage = () => {
     const location = useLocation();
     const requestedItem = location.state;
 
     const [showPopUp, setShowPopUp] = React.useState(false);
+    const [showDeletePopUp, setShowDeletePopUp] = React.useState(false);
     // const fromDay = requestedItem.fromDate.getDate();
     // const fromMonth = (requestedItem.fromDate.getMonth()) + 1;
     // const fromYear = requestedItem.fromDate.getFullYear();
     // const fromDate = `${fromDay}/${fromMonth}/${fromYear}`;
+
+    const borrowerId = requestedItem.borrowedBy._id;
+    const currentUserId = decode(localStorage.getItem("shareItToken")).user_id;
 
     React.useEffect(() => {
         visitBorrowerProfile();
@@ -21,6 +28,10 @@ const RequestedItemPage = () => {
 
     function openPopUp() {
         setShowPopUp(true)
+    }
+
+    function openDeletePopUp() {
+        setShowDeletePopUp(true);
     }
 
     //Go to user profile
@@ -40,11 +51,22 @@ const RequestedItemPage = () => {
     return (
         <main className="requested-item-container">
             {showPopUp && <PopUp setShowPopUp={setShowPopUp} requestedItem={requestedItem}/>}
+            {showDeletePopUp && <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} requestedItem={requestedItem} currentUserId={currentUserId}/>}
                     <div className="heading">
                         <h1>{requestedItem.itemName}</h1>
+                        {/* Conditionally render button */}
+                        {borrowerId === currentUserId ? 
+                        <button
+                            onClick={openDeletePopUp}
+                        >
+                            Delete Item
+                        </button> :
                         <button
                             onClick={openPopUp}
-                        >Offer Item</button>
+                        >
+                            Offer Item
+                        </button>
+                        }
                     </div>
                     <div className="description-container">
                         <h2>Description</h2>
