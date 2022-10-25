@@ -251,6 +251,40 @@
     cursor: pointer;
 }
 
+/* Sign up prompt */
+.sign-up-prompt {
+    position: absolute;
+    right: 35%;
+    left: 35%;
+    top: 10em;
+    width: 35vw;
+    min-width: 25em;
+    height: 20vh;
+    background-color: rgba(255,255,255, .9);
+    border-radius: 1.5em;
+    box-shadow: .4em .5em 1em lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+    z-index: 1;
+}
+
+.sign-up-prompt h1 {
+    font-size: 1.2em;
+}
+
+.sign-up-prompt .close-prompt {
+    position: absolute;
+    text-align: end;
+    right: 1em;
+    top: .5em;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 /* User Profile */
 .user-profile-container {
     display: flex;
