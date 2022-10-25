@@ -48,7 +48,7 @@ function App() {
           </Auth>
         }/>
         <Route path="/offered/new" element={<OfferedItemForm />}/>
-        <Route path="/offered/visitor" element={<OfferedItemGrid />}/>
+        <Route path="/offered/visitor" element={<OfferedItemGrid offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>}/>
         <Route path="/offered/:id" element={<OfferedItemPage />}/>
         <Route path="/requested/new" element={<RequestedItemForm />}/>
         <Route path="/requested/" element={<RequestedItemGrid requestedItems={requestedItems} setRequestedItems={setRequestedItems}/>}/>
