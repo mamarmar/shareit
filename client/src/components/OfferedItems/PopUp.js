@@ -5,13 +5,13 @@ import decode from "jwt-decode";
 //EmailJS
 import { send } from "emailjs-com";
 
-function PopUp({ setShowPopUp, requestedItem }) {
+function PopUp({ setShowPopUp, offeredItem }) {
   const [toSend, setToSend] = React.useState({
     from_name: "",
     to_name: "",
     message: "",
     to_email: "",
-    requestedItem: "",
+    offeredItem: "",
     reply_to: "",
   });
 
@@ -35,8 +35,8 @@ function PopUp({ setShowPopUp, requestedItem }) {
       headers: { "x-access-token": token },
     };
     try {
-      const borrower = await axios.get(
-        `http://localhost:5000/user/${requestedItem.borrowedBy._id}`,
+      const lender = await axios.get(
+        `http://localhost:5000/user/${offeredItem.offeredBy._id}`,
         config
       );
       const currentUser = await axios.get(
@@ -47,9 +47,9 @@ function PopUp({ setShowPopUp, requestedItem }) {
         return {
           ...prevToSend,
           from_name: currentUser.data.firstName,
-          to_name: borrower.data.firstName,
-          to_email: borrower.data.email,
-          requestedItem: requestedItem.itemName,
+          to_name: lender.data.firstName,
+          to_email: lender.data.email,
+          offeredItem: offeredItem.itemName,
           reply_to: currentUser.data.email,
         };
       });
@@ -67,7 +67,7 @@ function PopUp({ setShowPopUp, requestedItem }) {
       updateState();
       const res = await send(
         "service_t9haahr",
-        "template_7g1qzln",
+        "template_zuyolh9",
         toSend,
         "pNxISdWFiXKTiASCC"
       );
@@ -87,7 +87,7 @@ function PopUp({ setShowPopUp, requestedItem }) {
         X
       </p>
       <h1>
-        Offer item to {requestedItem.borrowedBy.firstName}
+        Request item from {offeredItem.offeredBy.firstName}
       </h1>
       <form onSubmit={handleSubmit}>
         <textarea

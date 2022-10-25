@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 //Components
+import PopUp from "./PopUp";
 import DeletePopUp from "./DeletePopUp";
 //React Router
 import { useLocation, Link } from "react-router-dom";
@@ -11,6 +12,7 @@ const OfferedItemPage = () => {
     const location = useLocation();
     const offeredItem = location.state;
 
+    const [showPopUp, setShowPopUp] = React.useState(false);
     const [showDeletePopUp, setShowDeletePopUp] = React.useState(false);
 
     const lenderId = offeredItem.offeredBy._id;
@@ -20,9 +22,13 @@ const OfferedItemPage = () => {
         visitLenderProfile();
     });
 
+    function openPopUp() {
+        setShowPopUp(true)
+    };
+
     function openDeletePopUp() {
         setShowDeletePopUp(true);
-    }
+    };
 
     //Go to user profile
     async function visitLenderProfile() {
@@ -40,6 +46,7 @@ const OfferedItemPage = () => {
 
     return (
         <main className="offered-item-container">
+            {showPopUp && <PopUp setShowPopUp={setShowPopUp} offeredItem={offeredItem}/>}
             {showDeletePopUp && <DeletePopUp setShowDeletePopUp={setShowDeletePopUp} offeredItem={offeredItem} currentUserId={currentUserId}/>}
             <div className="images-container">
                 <div className="main-image-container">
@@ -100,6 +107,7 @@ const OfferedItemPage = () => {
                             Delete Item
                         </button> :
                         <button
+                        onClick={openPopUp}
                         >
                             Request Item
                         </button>
