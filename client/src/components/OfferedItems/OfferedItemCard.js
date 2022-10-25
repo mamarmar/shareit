@@ -13,6 +13,10 @@ export default function OfferedItemCard(props) {
   const [currentOfferedItem, setCurrentOfferedItem] = React.useState();
   let token = localStorage.getItem("shareItToken");
 
+  React.useEffect(() => {
+    handleClick();
+  },[]);
+
   function showSignUpPrompt() {
     props.setShowSignUpPrompt(true);
   }
@@ -28,6 +32,7 @@ export default function OfferedItemCard(props) {
         config
       );
       setCurrentOfferedItem(res.data.data[0]);
+      // console.log(res.data.data[0])
     } catch (err) {
       console.log({ error: err });
     }
@@ -55,7 +60,7 @@ export default function OfferedItemCard(props) {
           </CardContent>
         </Link>
       ) : (
-        <CardActionArea onClick={showSignUpPrompt} state={currentOfferedItem}>
+        <CardActionArea onClick={showSignUpPrompt}>
           <CardMedia
             component="img"
             height="140"

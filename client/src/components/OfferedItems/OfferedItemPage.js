@@ -1,7 +1,30 @@
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import React from "react";
+//React Router
+import { useLocation, Link } from "react-router-dom";
 
 const OfferedItemPage = () => {
-    const { id } = useParams();
+    const location = useLocation();
+    const offeredItem = location.state;
+
+    React.useEffect(() => {
+        visitLenderProfile();
+    });
+
+    //Go to user profile
+    async function visitLenderProfile() {
+        const token = localStorage.getItem("shareItToken");
+        let config = {
+        headers: { "x-access-token": token },
+        };
+        try {
+        await axios.get(
+            `http://localhost:5000/user/${offeredItem.offeredBy._id}`,config);
+        } catch (err) {
+        console.log({ error: err });
+        }
+    }
+
     return (
         <main className="offered-item-container">
             <div className="images-container">
@@ -21,12 +44,12 @@ const OfferedItemPage = () => {
                 </div>
             </div>
             <div className="offered-item-info-container">
-                <h1>Table {id}</h1>
+                <h1>{offeredItem.itemName}</h1>
                 <div className="offered-item-info">
                     <div className="description-container">
                         <h2>Description</h2>
                         <div className="description">
-                            <p>Long wooden table</p>
+                            <p>{offeredItem.description}</p>
                         </div>
                     </div>
                     <div className="additional-info-container">
@@ -35,17 +58,24 @@ const OfferedItemPage = () => {
                             <p>Category</p>
                         </div>
                         <div className="values">
-                            <p>Like New</p>
-                            <p>Furniture</p>
+                            <p>{offeredItem.condition}</p>
+                            <p>{offeredItem.category}</p>
                         </div>
                     </div>
                     <div className="lender-container">
                         <h3>Offered by</h3>
                         <div className="lender-info">
                             <div>
-                                <img className="user-image" alt="lender" src={require("../../images/user-image.jpeg")}/>
+                            <Link
+                                    to={`/user/${offeredItem.offeredBy._id}`}
+                                    state={offeredItem.offeredBy}
+                                    style={{ textDecoration: "none", color: "black" }}
+                                    onClick={visitLenderProfile}
+                                >
+                                    <img className="user-image" alt="borrower" src={require("../../images/user-image.jpeg")}/>
+                                </Link>
                             </div>
-                            <p>Username</p>
+                            <p>{offeredItem.offeredBy.firstName}</p>
                         </div>
                     </div>
                 </div>

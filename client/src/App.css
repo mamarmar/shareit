@@ -104,6 +104,15 @@
     justify-content: center;
 }
 
+.lender-info .user-image {
+    height: 4em;
+    width: 4em;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    cursor: pointer;
+}
+
 .offered-item-info-container button {
     background-color: #ED614C;
     color: white;
