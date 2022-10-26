@@ -68,6 +68,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
         id={item._id}
         itemName={item.itemName}
         itemImages={item.itemImages}
+        city={item.city}
         setShowSignUpPrompt={setShowSignUpPrompt}
       />
     );
@@ -80,6 +81,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
         id={item._id}
         itemName={item.itemName}
         itemImages={item.itemImages}
+        city={item.city}
         setShowSignUpPrompt={setShowSignUpPrompt}
       />
     );

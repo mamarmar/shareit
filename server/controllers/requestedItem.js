@@ -67,6 +67,13 @@ export const deleteRequestedItem = async (req, res) => {
   }
   const requestedItem = await requestedItemModel.findById(id);
   if (req.user.user_id === requestedItem.borrowedBy.valueOf()) {        // users can only delete items they have created themselves
+    //Find user who has requested the item
+    const user = await userModel.findById(req.user.user_id);
+    //Find the item that will be deleted in the itemsBorrowed array and remove it
+    const itemToBeDeleted = user.itemsBorrowed.find(itemId => itemId == id);
+    const index = user.itemsBorrowed.indexOf(itemToBeDeleted);
+    user.itemsBorrowed.splice(index, 1);
+    await user.save();
     await requestedItemModel.findByIdAndRemove(id);
     res.status(201).json({ message: "requested item deleted successfully." });
   } else {

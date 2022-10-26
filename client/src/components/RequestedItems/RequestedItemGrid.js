@@ -66,6 +66,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
                 id={item._id}
                 itemName={item.itemName}
                 itemImages={item.itemImages}
+                city={item.city}
             />
         )
     })
@@ -77,6 +78,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
                 id={item._id}
                 itemName={item.itemName}
                 itemImages={item.itemImages}
+                city={item.city}
             />
         )
     })

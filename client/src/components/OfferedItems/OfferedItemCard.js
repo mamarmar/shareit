@@ -57,6 +57,9 @@ export default function OfferedItemCard(props) {
             <Typography gutterBottom variant="h5" component="div">
               {props.itemName}
             </Typography>
+            <Typography gutterBottom variant="p" component="div">
+              {props.city}
+            </Typography>
           </CardContent>
         </Link>
       ) : (
@@ -70,6 +73,9 @@ export default function OfferedItemCard(props) {
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {props.itemName}
+            </Typography>
+            <Typography gutterBottom variant="p" component="div">
+              {props.city}
             </Typography>
           </CardContent>
         </CardActionArea>

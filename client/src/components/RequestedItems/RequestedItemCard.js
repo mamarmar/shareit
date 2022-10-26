@@ -52,6 +52,9 @@ export default function RequestedItemCard(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.itemName}
           </Typography>
+          <Typography gutterBottom variant="p" component="div">
+            {props.city}
+          </Typography>
         </CardContent>
       </Link>
       {/* Button not currently in use

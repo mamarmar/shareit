@@ -7,37 +7,44 @@ import RequestedItemCard from "../RequestedItems/RequestedItemCard";
 import { useLocation } from "react-router-dom";
 
 const UserProfile = () => {
-    // const [borrowedItems, setBorrowedItems]=React.useState([]);
+    const [requestedItems, setRequestedItems]=React.useState([]);
+    const cardSlider = React.useRef();
     const location = useLocation();
 
     const user = location.state;
+    console.log(user.itemsBorrowed);
 
-    // React.useEffect(() => {
-    //     getBorrowedItems();
-    // },[]);
-    // console.log(user.itemsBorrowed[0]);
+    React.useEffect(() => {
+        getRequestedItems();
+    },[]);
 
-    // function getBorrowedItems() {
-    //     const token = localStorage.getItem("shareItToken");
-    //     let config = {
-    //         headers: { "x-access-token": token },
-    //     };
-    //     try {
-    //         user.itemsBorrowed.map(async (item) => {
-    //             const borrowedItem = await axios.get(`http://localhost:5000/requesteditems/${item}`,config);
-    //             setBorrowedItems(prevItems => {
-    //                 return [
-    //                     ...prevItems,
-    //                     borrowedItem
-    //                 ]
-    //             })
-    //         })
-    //     }catch(err) {
-    //         console.log(err);
-    //     }
-    // }
+    console.log({itemsBorrowed:user.itemsBorrowed});
 
-    const cardSlider = React.useRef();
+    function getRequestedItems() {
+        let requestedItemsArray=[];
+        const token = localStorage.getItem("shareItToken");
+        let config = {
+            headers: { "x-access-token": token }
+        };
+        user.itemsBorrowed.map(async(id) => {
+            try {
+                const requestedItem = await axios.get(`http://localhost:5000/requesteditems/${id}`,config);
+                // console.log(requestedItem.data.data[0]);
+                // setRequestedItems(prevItems => {
+                //     return [
+                //         ...prevItems,
+                //         requestedItem.data.data[0]
+                //     ]
+                // })
+                requestedItemsArray.push(requestedItem.data.data[0]);
+            }catch(err) {
+                console.log({Error:err});
+            }
+        })
+        setRequestedItems(requestedItemsArray);
+    };
+
+    
 
     return (
         <main className="user-profile-container">
@@ -56,14 +63,15 @@ const UserProfile = () => {
                 {/* Conditionally render borrowed items section */}
                 {user.itemsBorrowed.length ? 
                 <div className="user-borrowed-items">
-                    <h3>I have borrowed</h3>
+                    <h3>I have requested</h3>
                     <div className="card-slider" ref={cardSlider}>
-                    {user.itemsBorrowed.map(item=> {
+                    {requestedItems.map(item=> {
                             return <RequestedItemCard 
                                         className="slider-item"
                                         key={item._id}
                                         id={item._id}
                                         itemName={item.itemName}
+                                        city={item.city}
                                         itemImages={item.itemImages}
                                     />
                         })}
@@ -73,7 +81,7 @@ const UserProfile = () => {
                 {/* Conditionally render lent items section */}
                 {user.itemsLent.length ?
                 <div className="user-lent-items">
-                    <h3>I have lent</h3>
+                    <h3>I am offering</h3>
                     <div className="card-slider" ref={cardSlider}>
                         {user.itemsLent.map(item=> {
                             return <div className="slider-item">Item Card</div>
