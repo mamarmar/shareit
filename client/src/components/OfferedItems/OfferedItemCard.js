@@ -74,11 +74,12 @@ export default function OfferedItemCard(props) {
           </CardContent>
         </CardActionArea>
       )}
+      {/* Button not currently in use
       <CardActions>
         <Button size="small" color="primary">
           Request Item
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }
