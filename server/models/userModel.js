@@ -37,17 +37,23 @@ const userSchema = new mongoose.Schema(
         profilePic : {
             type: String
         },
-         //itemsBorrowed array can be populated either by OfferedItem or by RequestedItem.
-         //If the requested item is requested by the user, then the RequestedItem should be added to the array.
-         //If the offered item is borrowed by the user, then the OfferedItem should be added to the array.
+        //itemsBorrowed array should be populated either by OfferedItem or by RequestedItem.
+        //If the requested item is requested by the user, then the RequestedItem should be added to the array.
+        //If the offered item is borrowed by the user, then the OfferedItem should be added to the array.
+        //At the moment the user cannot reserve an offered item on the client side. So temporarily the itemsBorrowed array
+        // will only be populated with requested items that the user has created
+        // itemsBorrowed: [{ 
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     refPath: 'itemsBorrowedModel'
+        // }],
+        // itemsBorrowedModel: {         
+        //     type: String,
+        //     enum: ['OfferedItem', 'RequestedItem']
+        // },
         itemsBorrowed: [{ 
             type: mongoose.Schema.Types.ObjectId,
-            refPath: 'itemsBorrowedModel'
-        }], 
-        itemsBorrowedModel: {         
-            type: String,
-            enum: ['OfferedItem', 'RequestedItem']
-        },
+            ref: 'RequestedItem'
+        }],
         //itemsLent array can also be populated either by OfferedItem or by RequestedItem.
         //If the offered item is offered by the user, then the OfferedItem should be added to the array. 
         //If the requested item is lent by the user, then the RequestedItem should be added to the array.

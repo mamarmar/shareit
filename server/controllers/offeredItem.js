@@ -97,7 +97,7 @@ export const reserveOfferedItem = async(req, res) => {
     //If dates are not taken, push the object to the offeredItem.borrowedBy array
     offeredItem.borrowedBy.push(borrowing);
     await offeredItem.save();
-    //Find current user and update itemsBorrowed array
+    //Find current user and update itemsBorrowed array - currently not working because itemsBorrowed array contains only requested items
     const user = await userModel.findById(req.user.user_id);
     user.itemsBorrowed.push(offeredItem);
     await user.save();

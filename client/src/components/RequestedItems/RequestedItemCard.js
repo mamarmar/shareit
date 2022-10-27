@@ -18,6 +18,7 @@ export default function RequestedItemCard(props) {
 
   //Go to item page
   async function handleClick() {
+    console.log(props.id)
     const token = localStorage.getItem("shareItToken");
     let config = {
       headers: { "x-access-token": token },

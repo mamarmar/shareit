@@ -12,6 +12,7 @@ const RequestedItemPage = () => {
     const location = useLocation();
     const requestedItem = location.state;
 
+    const [borrower, setBorrower] = React.useState({});
     const [showPopUp, setShowPopUp] = React.useState(false);
     const [showDeletePopUp, setShowDeletePopUp] = React.useState(false);
     // const fromDay = requestedItem.fromDate.getDate();
@@ -41,8 +42,8 @@ const RequestedItemPage = () => {
         headers: { "x-access-token": token },
         };
         try {
-        await axios.get(
-            `http://localhost:5000/user/${requestedItem.borrowedBy._id}`,config);
+        const res = await axios.get(`http://localhost:5000/user/${requestedItem.borrowedBy._id}`,config);
+        setBorrower(res.data);
         } catch (err) {
         console.log({ error: err });
         }
@@ -84,7 +85,7 @@ const RequestedItemPage = () => {
                             <div>
                                     <Link
                                     to={`/user/${requestedItem.borrowedBy._id}`}
-                                    state={requestedItem.borrowedBy}
+                                    state={borrower}
                                     style={{ textDecoration: "none", color: "black" }}
                                     onClick={visitBorrowerProfile}
                                 >

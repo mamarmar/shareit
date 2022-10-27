@@ -7,44 +7,11 @@ import RequestedItemCard from "../RequestedItems/RequestedItemCard";
 import { useLocation } from "react-router-dom";
 
 const UserProfile = () => {
-    const [requestedItems, setRequestedItems]=React.useState([]);
     const cardSlider = React.useRef();
     const location = useLocation();
 
     const user = location.state;
-    console.log(user.itemsBorrowed);
-
-    React.useEffect(() => {
-        getRequestedItems();
-    },[]);
-
-    console.log({itemsBorrowed:user.itemsBorrowed});
-
-    function getRequestedItems() {
-        let requestedItemsArray=[];
-        const token = localStorage.getItem("shareItToken");
-        let config = {
-            headers: { "x-access-token": token }
-        };
-        user.itemsBorrowed.map(async(id) => {
-            try {
-                const requestedItem = await axios.get(`http://localhost:5000/requesteditems/${id}`,config);
-                // console.log(requestedItem.data.data[0]);
-                // setRequestedItems(prevItems => {
-                //     return [
-                //         ...prevItems,
-                //         requestedItem.data.data[0]
-                //     ]
-                // })
-                requestedItemsArray.push(requestedItem.data.data[0]);
-            }catch(err) {
-                console.log({Error:err});
-            }
-        })
-        setRequestedItems(requestedItemsArray);
-    };
-
-    
+    console.log(user);
 
     return (
         <main className="user-profile-container">
@@ -65,7 +32,7 @@ const UserProfile = () => {
                 <div className="user-borrowed-items">
                     <h3>I have requested</h3>
                     <div className="card-slider" ref={cardSlider}>
-                    {requestedItems.map(item=> {
+                    {user.itemsBorrowed.map(item=> {
                             return <RequestedItemCard 
                                         className="slider-item"
                                         key={item._id}

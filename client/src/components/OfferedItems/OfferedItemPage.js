@@ -12,6 +12,7 @@ const OfferedItemPage = () => {
     const location = useLocation();
     const offeredItem = location.state;
 
+    const [lender, setLender] = React.useState({});
     const [showPopUp, setShowPopUp] = React.useState(false);
     const [showDeletePopUp, setShowDeletePopUp] = React.useState(false);
 
@@ -37,8 +38,8 @@ const OfferedItemPage = () => {
         headers: { "x-access-token": token },
         };
         try {
-        await axios.get(
-            `http://localhost:5000/user/${offeredItem.offeredBy._id}`,config);
+        const res = await axios.get(`http://localhost:5000/user/${offeredItem.offeredBy._id}`,config);
+        setLender(res.data);
         } catch (err) {
         console.log({ error: err });
         }
@@ -89,7 +90,7 @@ const OfferedItemPage = () => {
                             <div>
                             <Link
                                     to={`/user/${offeredItem.offeredBy._id}`}
-                                    state={offeredItem.offeredBy}
+                                    state={lender}
                                     style={{ textDecoration: "none", color: "black" }}
                                     onClick={visitLenderProfile}
                                 >
