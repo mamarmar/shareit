@@ -91,7 +91,7 @@ export const offerRequestedItem = async (req, res) => {
     const requestedItem = await requestedItemModel.findById(id);
     requestedItem.offeredBy = req.user.user_id; //current user
     await requestedItem.save();
-    //Find current user and update itemsLent array
+    //Find current user and update itemsLent array - currently not working because itemsLent array contains only offered items
     const user = await userModel.findById(req.user.user_id);
     user.itemsLent.push(requestedItem);
     await user.save();

@@ -132,7 +132,7 @@ export const getUser = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No user with id: ${id}`);
   try {
-    const user = await userModel.findById(id).populate('itemsBorrowed');
+    const user = await userModel.findById(id).populate('itemsBorrowed').populate('itemsLent');
     res.status(200).json(user);
   } catch (err) {
     res.status(404).json({ message: err.message });

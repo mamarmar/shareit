@@ -54,17 +54,23 @@ const userSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'RequestedItem'
         }],
-        //itemsLent array can also be populated either by OfferedItem or by RequestedItem.
+        //itemsLent array should also be populated either by OfferedItem or by RequestedItem.
         //If the offered item is offered by the user, then the OfferedItem should be added to the array. 
         //If the requested item is lent by the user, then the RequestedItem should be added to the array.
+        //At the moment the user cannot offer a requested item on the client side. So temporarily the itemsLent array
+        // will only be populated with offered items that the user has created
+        // itemsLent: [{ 
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     refPath: 'itemsLentModel' 
+        // }], 
+        // itemsLentModel: {              
+        //     type: String,
+        //     enum: ['OfferedItem', 'RequestedItem']
+        // },
         itemsLent: [{ 
             type: mongoose.Schema.Types.ObjectId,
-            refPath: 'itemsLentModel' 
-        }], 
-        itemsLentModel: {              
-            type: String,
-            enum: ['OfferedItem', 'RequestedItem']
-        },
+            ref: 'OfferedItem'
+        }],
         token: {
             type: String
         }

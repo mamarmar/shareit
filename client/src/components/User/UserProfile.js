@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 //Components
 import RequestedItemCard from "../RequestedItems/RequestedItemCard";
-// import OfferedItemCard from "../OfferedItems/OfferedItemCard";
+import OfferedItemCard from "../OfferedItems/OfferedItemCard";
 //React Router
 import { useLocation } from "react-router-dom";
 
@@ -51,7 +51,14 @@ const UserProfile = () => {
                     <h3>I am offering</h3>
                     <div className="card-slider" ref={cardSlider}>
                         {user.itemsLent.map(item=> {
-                            return <div className="slider-item">Item Card</div>
+                            return <OfferedItemCard 
+                                        className="slider-item"
+                                        key={item._id}
+                                        id={item._id}
+                                        itemName={item.itemName}
+                                        city={item.city}
+                                        itemImages={item.itemImages}
+                                    />
                         })}
                     </div>
                 </div>
