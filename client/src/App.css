@@ -350,3 +350,28 @@
     padding: 2em;
     border: 1px solid black;
 }
+
+/* Image Input */
+
+.img-input-container {
+    display: flex;
+}
+
+.preview-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.progress-container {
+    width: 100px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.check-img {
+    width: 40px;
+    height: 40px;
+}

@@ -1,11 +1,13 @@
 import axios from "axios";
+//Components
+// import ImageInput from "../ImageInput/ImageInput";
 //MUI
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Stack from "@mui/material/Stack";
+// import IconButton from "@mui/material/IconButton";
+// import PhotoCamera from "@mui/icons-material/PhotoCamera";
+// import Stack from "@mui/material/Stack";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -20,15 +22,15 @@ const theme = createTheme();
 
 export default function SignUp() {
   const [formData, setFormData] = React.useState({
-    firstName:"",
-    lastName:"",
-    email:"",
-    password:"",
-    country:"",
-    city:"",
-    address:"",
-    profilePic:""
-  })
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    country: "",
+    city: "",
+    address: "",
+    profilePic: "",
+  });
 
   //Handle change of multiple inputs
   function handleChange(e) {
@@ -40,18 +42,25 @@ export default function SignUp() {
     });
   }
 
+  const handleInputState = (name, value) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   // Create new user  when form is submitted
-async function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-      try {
-        const res = await axios.post(`http://localhost:5000/user/signup`, formData);
-        const token = res.data.token;
-        localStorage.setItem('shareItToken', token);
-      }catch(err) {
-        console.log("Could not send input");
-        console.log(err);
-      }
-}
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/user/signup`,
+        formData
+      );
+      const token = res.data.token;
+      localStorage.setItem("shareItToken", token);
+    } catch (err) {
+      console.log("Could not send input");
+      console.log(err);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -165,37 +174,15 @@ async function handleSubmit(event) {
                 />
               </Grid>
 
-              <Grid item xs={12}>
-                <Stack direction="row" alignItems="center" spacing={2}>
-                  <Button variant="contained" component="label">
-                    Profile Picture
-                    <input 
-                      hidden
-                      accept="image/*"
-                      multiple
-                      type="file"
-                      name="profilePic"
-                      value={formData.profilePic}
-                      onChange={handleChange}
-                    />
-                  </Button>
-                  <IconButton
-                    color="primary"
-                    aria-label="upload profile picture"
-                    component="label"
-                  >
-                    <input
-                      accept="image/*"
-                      multiple
-                      type="file"
-                      name="profilePic"
-                      value={formData.profilePic}
-                      onChange={handleChange}
-                    />
-                    <PhotoCamera />
-                  </IconButton>
-                </Stack>
-              </Grid>
+              {/* <Grid item xs={12}>
+                <ImageInput 
+                  type="image"
+                  name="profilePic"
+                  value={formData.profilePic}
+                  label="Choose a profile picture"
+                  handleInputState={handleInputState}
+                />
+              </Grid> */}
             </Grid>
             <Button
               type="submit"
