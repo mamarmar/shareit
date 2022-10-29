@@ -1,4 +1,6 @@
 import axios from "axios";
+//Logo
+import logo from "../../images/logo.svg";
 //React Router
 import { Link } from "react-router-dom";
 //MUI
@@ -45,7 +47,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -61,7 +63,11 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
             }}
           >
             ShareIt
-          </Typography>
+          </Typography> */}
+          <Link to="/">
+            <img src={logo} alt="logo" className="logo"></img>
+          </Link>
+          
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton

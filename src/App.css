@@ -2,6 +2,11 @@
     margin: 0;
 }
 
+.logo {
+    width:120px;
+    margin-right: 20px;
+}
+
 .offered-items-grid {
     padding: 1.5em;
     display: grid;

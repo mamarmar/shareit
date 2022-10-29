@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+//Logo
+import logo from "../../images/logo.svg";
 //Context
 import { AuthContext } from "../../context/UserContext";
 //React Router
@@ -146,7 +148,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -162,7 +164,10 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
             }}
           >
             ShareIt
-          </Typography>
+          </Typography> */}
+          <Link to="/">
+            <img src={logo} alt="logo" className="logo"></img>
+          </Link>
 
           <Box component="form" noValidate onSubmit={handleSubmit}>
             <TextField
