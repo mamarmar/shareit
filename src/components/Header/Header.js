@@ -67,7 +67,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
     e.preventDefault();
     const itemName = input.itemName;
     axios
-      .get(`http://localhost:3000/search=${itemName}`)
+      .get(`https://shareitapplication.herokuapp.com/search=${itemName}`)
       .then((res) => {
         console.log(res.data);
       })
@@ -83,7 +83,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
     };
     try {
       const res = await axios.get(
-        `http://localhost:5000/user/${decodedToken.user_id}`,
+        `https://shareitapplication.herokuapp.com/user/${decodedToken.user_id}`,
         config
       );
       setCurrentUser(res.data);
@@ -95,7 +95,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
   //Get all offered items when menu item is clicked
   async function getAllOfferedItems() {
     try {
-      const res = await axios.get(`http://localhost:5000/offereditems/visitor`);
+      const res = await axios.get(`https://shareitapplication.herokuapp.com/offereditems/visitor`);
       setOfferedItems(res.data.data);
     } catch (err) {
       console.log("Could not fetch offered items");
@@ -110,7 +110,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
       headers: { "x-access-token": token },
     };
     try {
-      const res = await axios.get(`http://localhost:5000/requesteditems/`,config);
+      const res = await axios.get(`https://shareitapplication.herokuapp.com/requesteditems/`,config);
       setRequestedItems(res.data.data);
     } catch (err) {
       console.log({ error: err });

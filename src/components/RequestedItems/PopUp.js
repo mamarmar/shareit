@@ -36,11 +36,11 @@ function PopUp({ setShowPopUp, requestedItem }) {
     };
     try {
       const borrower = await axios.get(
-        `http://localhost:5000/user/${requestedItem.borrowedBy._id}`,
+        `https://shareitapplication.herokuapp.com/user/${requestedItem.borrowedBy._id}`,
         config
       );
       const currentUser = await axios.get(
-        `http://localhost:5000/user/${decodedToken.user_id}`,
+        `https://shareitapplication.herokuapp.com/user/${decodedToken.user_id}`,
         config
       );
       setToSend((prevToSend) => {

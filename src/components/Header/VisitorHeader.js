@@ -25,7 +25,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
   //Get all offered items when button is clicked
   async function handleClick() {
     try {
-      const res = await axios.get(`http://localhost:5000/offereditems/visitor`);
+      const res = await axios.get(`https://shareitapplication.herokuapp.com/offereditems/visitor`);
       setOfferedItems(res.data.data);
     } catch (err) {
       console.log("Could not fetch offered items");
@@ -60,7 +60,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
               textDecoration: "none",
             }}
           >
-            ShareItTest
+            ShareIt
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

@@ -42,7 +42,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
             headers: { "x-access-token": token },
         };
         try {
-            const res = await axios.get(`http://localhost:5000/requesteditems/search`, config);
+            const res = await axios.get(`https://shareitapplication.herokuapp.com/requesteditems/search`, config);
             if (res.data.data.length === 0) {
                 alert("There are no results matching your search. Please modify your filters and try again.")
             } else {

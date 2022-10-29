@@ -38,7 +38,7 @@ const OfferedItemPage = () => {
         headers: { "x-access-token": token },
         };
         try {
-        const res = await axios.get(`http://localhost:5000/user/${offeredItem.offeredBy._id}`,config);
+        const res = await axios.get(`https://shareitapplication.herokuapp.com/user/${offeredItem.offeredBy._id}`,config);
         setLender(res.data);
         } catch (err) {
         console.log({ error: err });

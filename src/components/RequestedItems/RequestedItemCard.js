@@ -25,7 +25,7 @@ export default function RequestedItemCard(props) {
     };
     try {
       const res = await axios.get(
-        `http://localhost:5000/requesteditems/${props.id}`,
+        `https://shareitapplication.herokuapp.com/requesteditems/${props.id}`,
         config
       );
       setCurrentRequestedItem(res.data.data[0]);

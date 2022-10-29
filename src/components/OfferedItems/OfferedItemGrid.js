@@ -40,7 +40,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
     };
     try {
       const res = await axios.get(
-        `http://localhost:5000/offereditems/search`,
+        `https://shareitapplication.herokuapp.com/offereditems/search`,
         config
       );
       if (res.data.data.length === 0) {

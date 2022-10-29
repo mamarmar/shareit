@@ -51,7 +51,7 @@ export default function SignUp() {
     event.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:5000/user/signup`,
+        `https://shareitapplication.herokuapp.com/user/signup`,
         formData
       );
       const token = res.data.token;
