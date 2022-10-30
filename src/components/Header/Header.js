@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 //Logo
 import logo from "../../images/logo.svg";
+import profilePic from "../../images/user-image.jpeg"
 //Context
 import { AuthContext } from "../../context/UserContext";
 //React Router
@@ -22,19 +23,15 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { TextField } from "@mui/material";
+import Image from "mui-image";
 
-const pages = [
-  {
-    title: "Offer an Item",
-    linkTo: "/offered/new",
-  },
-  {
-    title: "Request an Item",
-    linkTo: "/requested/new",
-  },
-];
-
-const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedItems }) => {
+const Header = ({
+  offeredItems,
+  setOfferedItems,
+  requestedItems,
+  setRequestedItems,
+}) => {
+  
   const [input, setInput] = React.useState({
     itemName: "",
   });
@@ -97,7 +94,9 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
   //Get all offered items when menu item is clicked
   async function getAllOfferedItems() {
     try {
-      const res = await axios.get(`https://shareitapplication.herokuapp.com/offereditems/visitor`);
+      const res = await axios.get(
+        `https://shareitapplication.herokuapp.com/offereditems/visitor`
+      );
       setOfferedItems(res.data.data);
     } catch (err) {
       console.log("Could not fetch offered items");
@@ -112,7 +111,10 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
       headers: { "x-access-token": token },
     };
     try {
-      const res = await axios.get(`https://shareitapplication.herokuapp.com/requesteditems/`,config);
+      const res = await axios.get(
+        `https://shareitapplication.herokuapp.com/requesteditems/`,
+        config
+      );
       setRequestedItems(res.data.data);
     } catch (err) {
       console.log({ error: err });
@@ -145,31 +147,25 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor:'common.white' }}>
+    <AppBar position="static" sx={{ bgcolor: "common.white" }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            ShareIt
-          </Typography> */}
-          <Link to="/">
-            <img src={logo} alt="logo" className="logo"></img>
-          </Link>
-
-          <Box component="form" noValidate onSubmit={handleSubmit}>
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          <Box>
+            <Link to="/">
+              <Image
+                src={logo}
+                alt="logo"
+                width="120px"
+                component="a"
+                duration={0}
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                }}
+              />
+            </Link>
+          </Box>
+          {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
             <TextField
               fullWidth
               id="itemName"
@@ -179,9 +175,15 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
               autofocus
               onChange={handleChange}
             />
-          </Box>
+          </Box> */}
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, color:"common.black" }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              color: "common.black",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -210,59 +212,139 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <Link
-                  to={page.linkTo}
-                  style={{ textDecoration: "none"}}
+              <Link
+                to="/offered/visitor"
+                style={{ textDecoration: "none" }}
+                onClick={getAllOfferedItems}
+                state={offeredItems}
+              >
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "common.black" }}
                 >
-                  <MenuItem key={page.title} onClick={handleCloseNavMenu} sx={{ color:'common.black' }}>
-                    <Typography textAlign="center">{page.title}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
+                  <Typography textAlign="center">
+                    Offered Items
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link
+                to="requested"
+                style={{ textDecoration: "none" }}
+                onClick={getAllRequestedItems}
+                state={requestedItems}
+              >
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "common.black" }}
+                >
+                  <Typography textAlign="center">
+                    Requested Items
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link to="/offered/new" style={{ textDecoration: "none" }}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "common.black" }}
+                >
+                  <Typography textAlign="center"> Offer an Item</Typography>
+                </MenuItem>
+              </Link>
+              <Link to="/requested/new" style={{ textDecoration: "none" }}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "common.black" }}
+                >
+                  <Typography textAlign="center"> Request an Item</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
+          <Box
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
             }}
           >
-            ShareItSmall
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link to={page.linkTo} style={{ textDecoration: "none" }}>
-                <Button
-                  key={page.title}
-                  onClick={handleCloseNavMenu}
-                  href={page.linkTo}
-                  sx={{ my: 2, color: "common.black", display: "block" }}
-                >
-                  {page.title}
-                </Button>
-              </Link>
-            ))}
+            <Link to="/">
+              <Image
+                src={logo}
+                alt="logo"
+                width="120px"
+                component="a"
+                duration={0}
+              />
+            </Link>
+          </Box>
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" },gap:2 }}>
+            <Link
+              to={"/offered/visitor"}
+              style={{ textDecoration: "none" }}
+              onClick={getAllOfferedItems}
+              state={offeredItems}
+            >
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold",}}
+              >
+                Offered Items
+              </Button>
+            </Link>
+            <Link
+              to={"/requested"}
+              style={{ textDecoration: "none" }}
+              onClick={getAllRequestedItems}
+              state={requestedItems}
+            >
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold", }}
+              >
+                Requested Items
+              </Button>
+            </Link>
+            <Link to={"/offered/new"} style={{ textDecoration: "none" }}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold", }}
+              >
+                Offer an Item
+              </Button>
+            </Link>
+            
+            <Link to={"/requested/new"} style={{ textDecoration: "none" }} >
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold", }}
+              >
+                Request an Item
+              </Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                <Image
+                src={profilePic}
+                alt="user"
+                width="60px"
+                height="50px"
+                component="a"
+                fit="cover"
+                position="center"
+                duration={0}
+                sx={{
+                  mr: 2,
+                  borderRadius:"50%"
+                }}
+              />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: "45px"}}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -281,27 +363,21 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
                 to={`/user/${currentUser._id}`}
                 state={currentUser}
                 onClick={handleProfileClick}
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none" }}
               >
-                <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem onClick={handleCloseUserMenu} sx={{color:'common.black'}}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
               </Link>
-              <Link to="/offered/visitor" style={{textDecoration:"none", color:"black"}} state={offeredItems} onClick={getAllOfferedItems}>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    Browse Offered Items
-                  </Typography>
+              <Link
+                to={`howitworks`}
+                style={{ textDecoration: "none"}}
+              >
+                <MenuItem onClick={handleCloseUserMenu} sx={{color:'common.black'}}>
+                  <Typography textAlign="center">How it works</Typography>
                 </MenuItem>
               </Link>
-              <Link to="/requested" style={{textDecoration:"none", color:"black"}} state={requestedItems} onClick={getAllRequestedItems}>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    Browse Requested Items
-                  </Typography>
-                </MenuItem>
-              </Link>
-              <MenuItem onClick={logOut}>
+              <MenuItem onClick={logOut} sx={{color:'common.black'}}>
                 <Typography textAlign="center">Log out</Typography>
               </MenuItem>
             </Menu>
