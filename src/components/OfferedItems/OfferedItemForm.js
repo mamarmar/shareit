@@ -14,7 +14,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    fontFamily:"Poppins",
+    fontWeightLight:300,
+    fontWeightRegular:400,
+    fontWeightMedium:500,
+    fontWeightBold:700
+  }
+});
 
 export default function OfferedItemForm() {
   const [formData, setFormData] = React.useState({
@@ -174,7 +182,7 @@ export default function OfferedItemForm() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor:"primary.light", fontSize:"16px" }}
             >
               Submit
             </Button>
