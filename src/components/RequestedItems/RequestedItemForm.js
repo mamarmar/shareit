@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import CssBaseline from "@mui/material/CssBaseline";
+import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -14,7 +15,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    fontFamily:"Poppins",
+    fontWeightLight:300,
+    fontWeightRegular:400,
+    fontWeightMedium:500,
+    fontWeightBold:700
+  }
+});
 
 export default function RequestedItemForm() {
   const [formData, setFormData] = React.useState({
@@ -127,6 +136,7 @@ export default function RequestedItemForm() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+              <InputLabel>From Date*</InputLabel>
                 <TextField
                   autoComplete="fromDate"
                   name="fromDate"
@@ -134,18 +144,17 @@ export default function RequestedItemForm() {
                   required
                   fullWidth
                   id="fromDate"
-                  label="From Date"
                   type="date"
                   onChange={handleChange}
                   
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+              <InputLabel>To Date*</InputLabel>
                 <TextField
                   required
                   fullWidth
                   id="toDate"
-                  label="To date"
                   name="toDate"
                   value={formData.toDate}
                   autoComplete="toDate"
@@ -153,36 +162,12 @@ export default function RequestedItemForm() {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <Stack direction="row" alignItems="center" spacing={2}>
-                  <Button variant="contained" component="label">
-                    Indicative Image
-                    <input 
-                      hidden
-                      accept="image/*"
-                      multiple
-                      type="file"
-                      name="indicativeImage"
-                      value={formData.indicativeImage}
-                      onChange={handleChange}
-                    />
-                  </Button>
-                  <IconButton
-                    color="primary"
-                    aria-label="upload profile picture"
-                    component="label"
-                  >
-                    <input accept="image/*" type="file" />
-                    <PhotoCamera />
-                  </IconButton>
-                </Stack>
-              </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor:'primary.light', fontSize:"16px"}}
             >
               Submit
             </Button>
