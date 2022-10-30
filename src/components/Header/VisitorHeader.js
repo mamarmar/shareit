@@ -108,7 +108,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                   sx={{ color: "common.black" }}
                 >
                   <Typography textAlign="center">
-                    Browse Offered Items
+                    Offered Items
                   </Typography>
                 </MenuItem>
               </Link>
@@ -168,7 +168,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                   fontWeight: "bold",
                 }}
               >
-                Browse Offered Items
+                Offered Items
               </Button>
             </Link>
             <Link to="/howitworks" style={{ textDecoration: "none" }}>
@@ -176,7 +176,6 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 sx={{
                   color: "common.black",
                   display: "block",
-                  fontWeight: "bold",
                 }}
               >
                 How it works
@@ -187,7 +186,6 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 sx={{
                   color: "common.black",
                   display: "block",
-                  fontWeight: "bold",
                 }}
               >
                 About us
@@ -212,6 +210,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 variant="contained"
                 sx={{
                   fontWeight: "bold",
+                  color:"common.white"
                 }}
               >
                 Sign up
