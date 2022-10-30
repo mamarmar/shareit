@@ -147,7 +147,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
               <Image
                 src={logo}
                 alt="logo"
-                width="120px"
+                width="90px"
                 component="a"
                 duration={0}
               />
@@ -205,6 +205,8 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 sx={{
                   fontWeight: "bold",
                   marginRight: "5px",
+                  whiteSpace: "no-wrap",
+                  minWidth: "max-content"
                 }}
                 variant="outlined"
               >
@@ -216,7 +218,9 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 variant="contained"
                 sx={{
                   fontWeight: "bold",
-                  color:"common.white"
+                  color:"common.white",
+                  whiteSpace: "no-wrap",
+                  minWidth: "max-content"
                 }}
               >
                 Sign up
