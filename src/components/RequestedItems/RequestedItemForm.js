@@ -47,7 +47,7 @@ export default function RequestedItemForm() {
       }
     };
     try {
-      const res = await axios.post(`https://shareitapplication.herokuapp.com/requesteditems/form`, formData, config);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/requesteditems/form`, formData, config);
       console.log(res);
     }catch(err) {
         console.log("Could not create offered item");

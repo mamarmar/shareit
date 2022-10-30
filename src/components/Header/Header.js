@@ -69,7 +69,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
     e.preventDefault();
     const itemName = input.itemName;
     axios
-      .get(`https://shareitapplication.herokuapp.com/search=${itemName}`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/search=${itemName}`)
       .then((res) => {
         console.log(res.data);
       })
@@ -85,7 +85,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
     };
     try {
       const res = await axios.get(
-        `https://shareitapplication.herokuapp.com/user/${decodedToken.user_id}`,
+        `${process.env.REACT_APP_SERVER_URL}/user/${decodedToken.user_id}`,
         config
       );
       setCurrentUser(res.data);

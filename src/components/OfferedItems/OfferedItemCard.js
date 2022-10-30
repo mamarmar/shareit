@@ -28,7 +28,7 @@ export default function OfferedItemCard(props) {
     };
     try {
       const res = await axios.get(
-        `https://shareitapplication.herokuapp.com/offereditems/${props.id}`,
+        `${process.env.REACT_APP_SERVER_URL}/offereditems/${props.id}`,
         config
       );
       setCurrentOfferedItem(res.data.data[0]);

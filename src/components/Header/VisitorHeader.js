@@ -27,7 +27,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
   //Get all offered items when button is clicked
   async function handleClick() {
     try {
-      const res = await axios.get(`https://shareitapplication.herokuapp.com/offereditems/visitor`);
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/offereditems/visitor`);
       setOfferedItems(res.data.data);
     } catch (err) {
       console.log("Could not fetch offered items");

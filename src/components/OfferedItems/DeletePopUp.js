@@ -17,7 +17,7 @@ function DeletePopUp({ setShowDeletePopUp, offeredItem, currentUserId }) {
         headers: { "x-access-token": token },
         };
         try {
-            const res = await axios.delete(`https://shareitapplication.herokuapp.com/offereditems/${offeredItem._id}`,config);
+            const res = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/offereditems/${offeredItem._id}`,config);
             console.log(res);
             navigate("/offered/new");
             window.location.reload();

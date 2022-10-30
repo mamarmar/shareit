@@ -42,7 +42,7 @@ const RequestedItemPage = () => {
         headers: { "x-access-token": token },
         };
         try {
-        const res = await axios.get(`https://shareitapplication.herokuapp.com/user/${requestedItem.borrowedBy._id}`,config);
+        const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/${requestedItem.borrowedBy._id}`,config);
         setBorrower(res.data);
         } catch (err) {
         console.log({ error: err });

@@ -9,7 +9,7 @@ function Auth({ children }) {
 
     const handleLogin = async(data) => {
         try {
-            const res = await axios.post(`https://shareitapplication.herokuapp.com/user/login`, data);
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/login`, data);
             const token = res.data.user.token;
             localStorage.setItem('shareItToken', token);
             navigate("/requested/new");
