@@ -150,7 +150,13 @@ const Header = ({
     <AppBar position="static" sx={{ bgcolor: "common.white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-          <Box>
+          <Box
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              flexGrow: 0,
+            }}
+          >
             <Link to="/">
               <Image
                 src={logo}

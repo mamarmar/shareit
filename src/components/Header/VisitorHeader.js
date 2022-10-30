@@ -47,7 +47,13 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
     <AppBar position="static" sx={{ bgcolor: "common.white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-          <Box>
+          <Box
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              flexGrow: 0,
+            }}
+          >
             <Link to="/">
               <Image
                 src={logo}
@@ -57,7 +63,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 duration={0}
                 sx={{
                   mr: 2,
-                  display: { xs: "none", md: "flex" },
+                  display: { xs: "none", md: "flex" }
                 }}
               />
             </Link>
@@ -134,7 +140,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
-              flexGrow: 1,
+              flexGrow: 1
             }}
           >
             <Link to="/">
