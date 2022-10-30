@@ -15,11 +15,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-
+import Image from "mui-image";
 
 const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
-  
-
   React.useEffect(() => {
     handleClick();
   }, []);
@@ -27,7 +25,9 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
   //Get all offered items when button is clicked
   async function handleClick() {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/offereditems/visitor`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/offereditems/visitor`
+      );
       setOfferedItems(res.data.data);
     } catch (err) {
       console.log("Could not fetch offered items");
@@ -44,32 +44,31 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ bgcolor: "common.white" }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          <Box>
+            <Link to="/">
+              <Image
+                src={logo}
+                alt="logo"
+                width="120px"
+                component="a"
+                duration={0}
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                }}
+              />
+            </Link>
+          </Box>
+          <Box
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              color: "common.black",
             }}
           >
-            ShareIt
-          </Typography> */}
-          <Link to="/">
-            <img src={logo} alt="logo" className="logo"></img>
-          </Link>
-          
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -98,66 +97,110 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <Link to="/offered/visitor" style={{textDecoration:"none", color:"black"}} state={offeredItems} onClick={handleClick}>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Browse Offered Items</Typography>
+              <Link
+                to="/offered/visitor"
+                style={{ textDecoration: "none" }}
+                state={offeredItems}
+                onClick={handleClick}
+              >
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "common.black" }}
+                >
+                  <Typography textAlign="center">
+                    Browse Offered Items
+                  </Typography>
                 </MenuItem>
               </Link>
-              <Link to="/howitworks" style={{textDecoration:"none", color:"black"}}>
-                <MenuItem onClick={handleCloseNavMenu}>
+              <Link to="/howitworks" style={{ textDecoration: "none" }}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "common.black" }}
+                >
                   <Typography textAlign="center">How it Works</Typography>
+                </MenuItem>
+              </Link>
+              <Link to="/about" style={{ textDecoration: "none" }}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "common.black" }}
+                >
+                  <Typography textAlign="center">About us</Typography>
                 </MenuItem>
               </Link>
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
+          <Box
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
             }}
           >
-            ShareIt
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Link to="/">
+              <Image
+                src={logo}
+                alt="logo"
+                width="120px"
+                component="a"
+                duration={0}
+              />
+            </Link>
+          </Box>
+          <Box
+            sx={{
+              flexGrow: 0,
+              display: { xs: "none", md: "flex" },
+              px: 1,
+              gap: 2,
+            }}
+          >
             <Link
               to="/offered/visitor"
               style={{ textDecoration: "none" }}
               state={offeredItems}
             >
               <Button
-                style={{
-                  backgroundColor: "#ED614C",
-                  fontSize: "14px",
+                onClick={handleClick}
+                sx={{
+                  color: "common.black",
+                  display: "block",
                   fontWeight: "bold",
                 }}
-                variant="contained"
-                onClick={handleClick}
               >
                 Browse Offered Items
               </Button>
             </Link>
+            <Link to="/howitworks" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "common.black",
+                  display: "block",
+                  fontWeight: "bold",
+                }}
+              >
+                How it works
+              </Button>
+            </Link>
+            <Link to="/about" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "common.black",
+                  display: "block",
+                  fontWeight: "bold",
+                }}
+              >
+                About us
+              </Button>
+            </Link>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "flex" } }}>
             <Link to="/login" style={{ textDecoration: "none" }}>
               <Button
-                style={{
-                  borderColor: "#ED614C",
-                  backgroundColor:"white",
-                  color:"#ED614C",
-                  fontSize: "14px",
+                sx={{
                   fontWeight: "bold",
-                  marginRight:"5px"
+                  marginRight: "5px",
                 }}
                 variant="outlined"
               >
@@ -166,13 +209,10 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
             </Link>
             <Link to="/signup" style={{ textDecoration: "none" }}>
               <Button
-                style={{
-                  backgroundColor: "#ED614C",
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  
-                }}
                 variant="contained"
+                sx={{
+                  fontWeight: "bold",
+                }}
               >
                 Sign up
               </Button>

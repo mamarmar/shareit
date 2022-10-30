@@ -2,6 +2,10 @@
     margin: 0;
 }
 
+.App {
+    background-color: #FAF8F7;
+}
+
 .logo {
     width:120px;
     margin-right: 20px;

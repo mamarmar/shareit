@@ -145,7 +145,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ bgcolor:'common.white' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <Typography
@@ -181,7 +181,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
             />
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, color:"common.black" }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -213,9 +213,9 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
               {pages.map((page) => (
                 <Link
                   to={page.linkTo}
-                  style={{ textDecoration: "none", color: "black" }}
+                  style={{ textDecoration: "none"}}
                 >
-                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <MenuItem key={page.title} onClick={handleCloseNavMenu} sx={{ color:'common.black' }}>
                     <Typography textAlign="center">{page.title}</Typography>
                   </MenuItem>
                 </Link>
@@ -238,7 +238,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
               textDecoration: "none",
             }}
           >
-            ShareIt
+            ShareItSmall
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -247,7 +247,7 @@ const Header = ({ offeredItems, setOfferedItems, requestedItems, setRequestedIte
                   key={page.title}
                   onClick={handleCloseNavMenu}
                   href={page.linkTo}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ my: 2, color: "common.black", display: "block" }}
                 >
                   {page.title}
                 </Button>
