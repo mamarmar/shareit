@@ -326,21 +326,7 @@ const Header = ({
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-                <Image
-                src={profilePic}
-                alt="user"
-                width="60px"
-                height="50px"
-                component="a"
-                fit="cover"
-                position="center"
-                duration={0}
-                sx={{
-                  mr: 2,
-                  borderRadius:"50%"
-                }}
-              />
+                <Avatar alt="user" src={profilePic} />
               </IconButton>
             </Tooltip>
             <Menu
