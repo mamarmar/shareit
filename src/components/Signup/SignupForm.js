@@ -1,6 +1,8 @@
 import axios from "axios";
 //Components
 // import ImageInput from "../ImageInput/ImageInput";
+//React Router
+import { useNavigate } from "react-router-dom";
 //MUI
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
@@ -18,7 +20,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    fontFamily:"Poppins",
+    fontWeightLight:300,
+    fontWeightRegular:400,
+    fontWeightMedium:500,
+    fontWeightBold:700
+  }
+});
 
 export default function SignUp() {
   const [formData, setFormData] = React.useState({
@@ -31,6 +41,8 @@ export default function SignUp() {
     address: "",
     profilePic: "",
   });
+
+  const navigate = useNavigate();
 
   //Handle change of multiple inputs
   function handleChange(e) {
@@ -56,6 +68,8 @@ export default function SignUp() {
       );
       const token = res.data.token;
       localStorage.setItem("shareItToken", token);
+      navigate("/requested/new");
+      window.location.reload();
     } catch (err) {
       console.log("Could not send input");
       console.log(err);
@@ -68,13 +82,13 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.light" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -188,7 +202,7 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor:'primary.light', fontSize:"16px"}}
             >
               Sign Up
             </Button>

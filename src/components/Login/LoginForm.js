@@ -17,7 +17,15 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    fontFamily:"Poppins",
+    fontWeightLight:300,
+    fontWeightRegular:400,
+    fontWeightMedium:500,
+    fontWeightBold:700
+  }
+});
 
 export default function SignIn() {
   const [formData, setFormData] = React.useState({
@@ -54,7 +62,7 @@ async function handleSubmit(event) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.light' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -93,7 +101,7 @@ async function handleSubmit(event) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor:"primary.light", fontSize:"16px" }}
             >
               Sign In
             </Button>
