@@ -74,6 +74,7 @@ export default function SignUp() {
       );
       const token = res.data.token;
       localStorage.setItem("shareItToken", token);
+      setUnsuccessfulSubmit(false)
       setSuccessfulSubmit(true);
       setTimeout(()=> {
         navigate("/requested/new");
