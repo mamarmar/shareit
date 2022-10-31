@@ -12,6 +12,11 @@ import Button from "@mui/material/Button";
 // import Stack from "@mui/material/Stack";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Autocomplete from '@mui/material/Autocomplete';
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -19,6 +24,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+//Greek cities
+import citiesArray from "../../json-files/cities.json"
 
 const theme = createTheme({
   typography: {
@@ -37,10 +44,16 @@ export default function SignUp() {
     email: "",
     password: "",
     country: "",
-    city: "",
+    city: null,
     address: "",
     profilePic: "",
   });
+  //City value state for MUI Autocomplete
+  const [cityValue, setCityValue] = React.useState(null);
+
+  const cities = citiesArray.map(item => {
+    return (`${item.city}, ${item.admin_name}`);
+  })
 
   const navigate = useNavigate();
 
@@ -54,13 +67,16 @@ export default function SignUp() {
     });
   }
 
-  const handleInputState = (name, value) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  // //Image Input
+  // const handleInputState = (name, value) => {
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
 
   // Create new user  when form is submitted
   async function handleSubmit(event) {
     event.preventDefault();
+    formData.city = cityValue;
+    console.log(formData)
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/user/signup`,
@@ -152,27 +168,31 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="country"
-                  name="country"
-                  value={formData.country}
-                  required
-                  fullWidth
-                  id="country"
-                  label="Country"
-                  onChange={handleChange}
-                />
+                <FormControl fullWidth>
+                  <InputLabel id="country-select-label">Country*</InputLabel>
+                    <Select
+                      required
+                      labelId="country-select-label"
+                      id="country-select"
+                      name="country"
+                      value={formData.country}
+                      label="Country"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={'Greece'}>Greece</MenuItem>
+                    </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={cities}
                   required
-                  fullWidth
-                  id="city"
-                  label="City"
-                  name="city"
-                  value={formData.city}
-                  autoComplete="city"
-                  onChange={handleChange}
+                  value={cityValue}
+                  onChange={(e,newValue) => setCityValue(newValue)}
+                  renderInput={(params) => <TextField {...params} label="City*"/>}
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
                 />
               </Grid>
               <Grid item xs={12}>
