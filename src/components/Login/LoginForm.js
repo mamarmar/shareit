@@ -6,6 +6,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Stack from '@mui/material/Stack';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
@@ -32,7 +35,8 @@ export default function SignIn() {
     email:"",
     password:""
   })
-  const { handleLogin } = React.useContext(AuthContext);
+  const { handleLogin, successfulSubmit, unsuccessfulSubmit, errorMessage } = React.useContext(AuthContext);
+
 
   //Handle change of multiple inputs
   function handleChange(e) {
@@ -68,6 +72,17 @@ async function handleSubmit(event) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {/* Conditionally render success or error message */}
+          {successfulSubmit &&
+            <Stack direction="row" alignItems="center" gap={1} sx={{color:'success.main', mt:2}}>
+              <CheckCircleOutlineIcon/>
+              <Typography> You have successfully logged in! </Typography>
+            </Stack>}
+          {unsuccessfulSubmit &&
+            <Stack direction="row" alignItems="center" gap={1} sx={{color:'error.main', mt:2, alignSelf:"center"}}>
+              <ErrorOutlineIcon/>
+              <Typography> {errorMessage || "An error occurred. Please try again later."} </Typography>
+            </Stack>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -93,10 +108,6 @@ async function handleSubmit(event) {
               autoComplete="current-password"
               onChange={handleChange}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -105,12 +116,7 @@ async function handleSubmit(event) {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+            <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}

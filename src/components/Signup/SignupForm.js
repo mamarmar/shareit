@@ -74,7 +74,7 @@ export default function SignUp() {
       );
       const token = res.data.token;
       localStorage.setItem("shareItToken", token);
-      setUnsuccessfulSubmit(false)
+      setUnsuccessfulSubmit(false);
       setSuccessfulSubmit(true);
       setTimeout(()=> {
         navigate("/requested/new");
@@ -113,7 +113,7 @@ export default function SignUp() {
           {unsuccessfulSubmit &&
             <Stack direction="row" alignItems="center" gap={1} sx={{color:'error.main', mt:2, alignSelf:"center"}}>
               <ErrorOutlineIcon/>
-              <Typography> {errorMessage} </Typography>
+              <Typography> {errorMessage || "An error occurred. Please try again later."} </Typography>
             </Stack>}
           <Box
             component="form"
