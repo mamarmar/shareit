@@ -13,6 +13,9 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import InputLabel from '@mui/material/InputLabel';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Stack from '@mui/material/Stack';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -24,6 +27,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+//Form Validation
+import { useForm } from "react-hook-form";
+
 //Greek cities
 import citiesArray from "../../json-files/cities.json"
 
@@ -38,16 +44,10 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
-  const [formData, setFormData] = React.useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    country: "",
-    city: null,
-    address: "",
-    profilePic: "",
-  });
+  
+  const [successfulSubmit, setSuccessfulSubmit] = React.useState(false);
+  const [unsuccessfulSubmit, setUnsuccessfulSubmit] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
   //City value state for MUI Autocomplete
   const [cityValue, setCityValue] = React.useState(null);
 
@@ -56,16 +56,7 @@ export default function SignUp() {
   })
 
   const navigate = useNavigate();
-
-  //Handle change of multiple inputs
-  function handleChange(e) {
-    setFormData((prevData) => {
-      return {
-        ...prevData,
-        [e.target.name]: e.target.value,
-      };
-    });
-  }
+  const { register, watch, handleSubmit, formState: { errors } } = useForm();
 
   // //Image Input
   // const handleInputState = (name, value) => {
@@ -73,22 +64,24 @@ export default function SignUp() {
   // };
 
   // Create new user  when form is submitted
-  async function handleSubmit(event) {
-    event.preventDefault();
-    formData.city = cityValue;
-    console.log(formData)
+  async function submitForm(data) {
+    data.city = cityValue;
+    console.log(data);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/user/signup`,
-        formData
+        data
       );
       const token = res.data.token;
       localStorage.setItem("shareItToken", token);
-      navigate("/requested/new");
-      window.location.reload();
-    } catch (err) {
-      console.log("Could not send input");
-      console.log(err);
+      setSuccessfulSubmit(true);
+      setTimeout(()=> {
+        navigate("/requested/new");
+        window.location.reload()
+      }, 2000);
+    }catch(err) {
+      setUnsuccessfulSubmit(true);
+      setErrorMessage(err.response.data);
     }
   }
 
@@ -110,24 +103,35 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {/* Conditionally render success or error message */}
+          {successfulSubmit &&
+            <Stack direction="row" alignItems="center" gap={1} sx={{color:'success.main', mt:2}}>
+              <CheckCircleOutlineIcon/>
+              <Typography> You have successfully signed up! </Typography>
+            </Stack>}
+          {unsuccessfulSubmit &&
+            <Stack direction="row" alignItems="center" gap={1} sx={{color:'error.main', mt:2, alignSelf:"center"}}>
+              <ErrorOutlineIcon/>
+              <Typography> {errorMessage} </Typography>
+            </Stack>}
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            autoComplete="off"
+            onSubmit={handleSubmit(submitForm)}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
+              
               <Grid item xs={12} sm={6}>
                 <TextField
+                  autoFocus
                   autoComplete="given-name"
-                  name="firstName"
-                  value={formData.firstName}
-                  required
-                  fullWidth
                   id="firstName"
                   label="First Name"
-                  autoFocus
-                  onChange={handleChange}
+                  {...register("firstName", { required: "Required field"})}
+                  error={!!errors?.firstName}
+                  helperText={errors?.firstName ? errors.firstName.message : null}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -136,48 +140,85 @@ export default function SignUp() {
                   fullWidth
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
-                  value={formData.lastName}
                   autoComplete="family-name"
-                  onChange={handleChange}
+                  {...register("lastName", { required: "Required field"})}
+                  error={!!errors?.firstName}
+                  helperText={errors?.lastName ? errors.lastName.message : null}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  type="email"
                   id="email"
                   label="Email Address"
-                  name="email"
-                  value={formData.email}
                   autoComplete="email"
-                  onChange={handleChange}
+                  {...register("email",{ 
+                                required: "Required field",
+                                pattern: {
+                                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                  message: "Please provide a valid email"
+                                }
+                              }, )}
+                  error={!!errors?.email}
+                  helperText={errors?.email ? errors.email.message : null}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  value={formData.password}
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  onChange={handleChange}
+                  {...register("password", { 
+                                required: "Required field",
+                                minLength: {
+                                  value: 8,
+                                  message: "Minimum 8 characters"
+                                },
+                                pattern: {
+                                  value: /^(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                                  message: "At least one capital letter, at least one lowercase letter and at least one special character (!@#$%^&*) needed"
+                                }
+                              })}
+                  error={!!errors?.password}
+                  helperText={errors?.password ? errors.password.message : null}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Confirm Password"
+                  type="password"
+                  id="cpassword"
+                  autoComplete="new-password"
+                  {...register("cpassword", { 
+                                required: true,
+                                validate: (val) => {
+                                  if (watch('password') !== val) {
+                                      return "Your passwords do not match"
+                                  }
+                                }
+                              })}
+                  error={!!errors?.cpassword}
+                  helperText={errors?.cpassword ? errors.cpassword.message : null}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
-                  <InputLabel id="country-select-label">Country*</InputLabel>
+                  <InputLabel id="country-select-label">Country *</InputLabel>
                     <Select
                       required
                       labelId="country-select-label"
                       id="country-select"
-                      name="country"
-                      value={formData.country}
                       label="Country"
-                      onChange={handleChange}
+                      {...register("country", { required: "Please select a country"})}
+                      error={!!errors?.country}
+                      helperText={errors?.country ? errors.country.message : null}
                     >
                       <MenuItem value={'Greece'}>Greece</MenuItem>
                     </Select>
@@ -188,23 +229,27 @@ export default function SignUp() {
                   disablePortal
                   id="combo-box-demo"
                   options={cities}
-                  required
                   value={cityValue}
-                  onChange={(e,newValue) => setCityValue(newValue)}
-                  renderInput={(params) => <TextField {...params} label="City*"/>}
+                  onChange={(e,newValue) => {setCityValue(newValue)}}
+                  renderInput={(params) => <TextField {...params} label="City*"
+                                              {...register("city", { required: "Please select a city"})}
+                                              error={!!errors?.city}
+                                              helperText={errors?.city ? errors.city.message : null}
+                                            />}
                   isOptionEqualToValue={(option, value) => option.id === value.id}
+                  
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="address"
-                  value={formData.address}
                   label="Address"
                   id="address"
                   autoComplete="address"
-                  onChange={handleChange}
+                  {...register("address", { required: "Required field"})}
+                      error={!!errors?.address}
+                      helperText={errors?.address ? errors.address.message : null}
                 />
               </Grid>
 
