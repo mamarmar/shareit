@@ -29,9 +29,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 //Form Validation
 import { useForm } from "react-hook-form";
-
 //Greek cities
-import citiesArray from "../../json-files/cities.json"
+import citiesArray from "../../json-files/cities.json";
 
 const theme = createTheme({
   typography: {
@@ -66,7 +65,6 @@ export default function SignUp() {
   // Create new user  when form is submitted
   async function submitForm(data) {
     data.city = cityValue;
-    console.log(data);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/user/signup`,
