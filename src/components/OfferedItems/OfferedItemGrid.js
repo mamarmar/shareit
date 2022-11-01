@@ -113,6 +113,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           <Typography
             sx={{
               color: "warning.main",
+              textAlign:"center"
             }}
           >
             There are no results matching your search. Please modify your

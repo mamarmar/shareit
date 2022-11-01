@@ -76,7 +76,7 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
           direction="row"
           sx={{
             justifyContent: "space-between",
-            gap: 3,
+            gap: {xs:1, md:3},
             mx: { xs: 2, md: 3 },
             mb: { xs: 0 },
           }}
@@ -122,7 +122,7 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
           direction="row"
           sx={{
             width: 200,
-            gap: 3,
+            gap: {xs:1, md:3},
             my: { xs: -1, md: 0 },
           }}
         >
