@@ -141,7 +141,7 @@ export default function SignUp() {
                   label="Last Name"
                   autoComplete="family-name"
                   {...register("lastName", { required: "Required field"})}
-                  error={!!errors?.firstName}
+                  error={!!errors?.lastName}
                   helperText={errors?.lastName ? errors.lastName.message : null}
                 />
               </Grid>
