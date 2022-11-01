@@ -36,14 +36,6 @@ const theme = createTheme({
 });
 
 export default function OfferedItemForm() {
-  // const [formData, setFormData] = React.useState({
-  //   itemName:"",
-  //   category:"",
-  //   description:"",
-  //   condition:"",
-  //   city:"",
-  //   itemImages:""
-  // })
 
   const [successfulSubmit, setSuccessfulSubmit] = React.useState(false);
   const [unsuccessfulSubmit, setUnsuccessfulSubmit] = React.useState(false);
@@ -74,16 +66,6 @@ export default function OfferedItemForm() {
   ];
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm();
-
-  // //Handle change of multiple inputs
-  // function handeleChange(e) {
-  //   setFormData((prevData) => {
-  //     return {
-  //       ...prevData,
-  //       [e.target.name]: e.target.value,
-  //     };
-  //   });
-  // }
 
   //Create new offered item when form is submitted
   async function offerItem(data) {
@@ -143,9 +125,6 @@ export default function OfferedItemForm() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="item-name"
-                  // name="itemName"
-                  // value={formData.itemName}
-                  // required
                   fullWidth
                   id="itemName"
                   label="What item?"
