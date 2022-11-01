@@ -32,7 +32,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   async function filterItems(data) {
     let config = {
       params: {
-        name: data.itemName ? data.itemName : null,
+        itemName: data.itemName ? data.itemName : null,
         city: data.city ? data.city : null,
         category: data.category ? data.category : null,
       },

@@ -18,6 +18,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
 
   const location = useLocation();
 
+  console.log(requestedItems);
   React.useEffect(() => {
     filterItems();
   });
@@ -32,7 +33,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
     const token = localStorage.getItem("shareItToken");
     let config = {
       params: {
-        name: data.itemName ? data.itemName : null,
+        itemName: data.itemName ? data.itemName : null,
         city: data.city ? data.city : null,
         category: data.category ? data.category : null,
       },
