@@ -137,7 +137,7 @@ export default function RequestedItemForm() {
               </Grid>
               <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
-                  <InputLabel id="country-select-label">Category *</InputLabel>
+                  <InputLabel id="category-select-label">Category *</InputLabel>
                     <Select
                       labelId="category-select-label"
                       id="category-select"
