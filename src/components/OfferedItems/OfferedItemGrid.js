@@ -2,51 +2,46 @@ import React from "react";
 import axios from "axios";
 //Components
 import OfferedItemCard from "./OfferedItemCard";
+import FiltersBar from "../FiltersBar";
 import SignUpPrompt from "./SignUpPrompt";
 //React Router
 import { useLocation } from "react-router-dom";
+//MUI
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 
 function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   const [showSignUpPrompt, setShowSignUpPrompt] = React.useState(false);
-  const [filter, setFilter] = React.useState({
-    itemName: "",
-    city: "",
-    category: "",
-  });
+  const [showFilterBar, setShowFilterBar] = React.useState(false);
+  const [showAlert, setShowAlert] = React.useState(false);
   const [filteredResults, setFilteredResults] = React.useState(false);
 
   const location = useLocation();
-  console.log({ locationState: location.state });
 
-  //Handle change of multiple inputs
-  function handleChange(e) {
-    setFilter((prevFilter) => {
-      return {
-        ...prevFilter,
-        [e.target.name]: e.target.value,
-      };
-    });
+  React.useEffect(() => {
+    filterItems();
+  });
+
+  function toggleFilterBar() {
+    setShowFilterBar((prevValue) => !prevValue);
   }
 
   //Get filtered offered items when form is submitted
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function filterItems(data) {
     let config = {
       params: {
-        name: filter.itemName ? filter.itemName : null,
-        city: filter.city ? filter.city : null,
-        category: filter.category ? filter.category : null,
+        name: data.itemName ? data.itemName : null,
+        city: data.city ? data.city : null,
+        category: data.category ? data.category : null,
       },
     };
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/offereditems/search`,
-        config
-      );
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/offereditems/search`,config);
+      setShowAlert(false);
       if (res.data.data.length === 0) {
-        alert(
-          "There are no results matching your search. Please modify your filters and try again."
-        );
+        setShowAlert(true);
       } else {
         setOfferedItems(res.data.data);
         setFilteredResults(true);
@@ -54,10 +49,6 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
     } catch (err) {
       console.log({ error: err });
     }
-  }
-
-  function clearFilters() {
-    setFilteredResults(false);
   }
 
   //Map over the incoming data and create an OfferedItemCard for every document
@@ -89,33 +80,46 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
 
   return (
     <div>
-      <div className="filter-nav">
-        <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Which item?"
-            id="itemName"
-            name="itemName"
-            value={filter.itemName}
-            onChange={handleChange}
-          />
-          <input
-            placeholder="City"
-            id="city"
-            name="city"
-            value={filter.city}
-            onChange={handleChange}
-          />
-          <input
-            placeholder="Category"
-            id="category"
-            name="category"
-            value={filter.category}
-            onChange={handleChange}
-          />
-          <button>Search</button>
-        </form>
-        <button onClick={clearFilters}> Clear filters</button>
-      </div>
+      {showFilterBar && (
+        <FiltersBar
+          setFilteredResults={setFilteredResults}
+          filterItems={filterItems}
+          showAlert={showAlert}
+        />
+      )}
+      <Stack
+        direction={{ md: "row", xs: "column" }}
+        sx={{
+          alignItems: "center",
+          justifyContent: { xs: "center", md: "start" },
+          mx: 3,
+          mt: 3,
+          gap: 2,
+        }}
+      >
+        <Tooltip title="Toggle Filter Bar">
+          <Button
+            variant="outlined"
+            onClick={toggleFilterBar}
+            sx={{
+              textAlign: "center",
+              fontWeight: 600,
+            }}
+          >
+            {showFilterBar ? "Filters ▲" : "Filters ▼"}
+          </Button>
+        </Tooltip>
+        {showAlert && (
+          <Typography
+            sx={{
+              color: "warning.main",
+            }}
+          >
+            There are no results matching your search. Please modify your
+            filters.
+          </Typography>
+        )}
+      </Stack>
       {showSignUpPrompt && (
         <SignUpPrompt setShowSignUpPrompt={setShowSignUpPrompt} />
       )}
