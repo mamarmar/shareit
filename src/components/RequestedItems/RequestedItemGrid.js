@@ -97,18 +97,22 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
       )}
       <Typography
         variant="h1"
+        noWrap
         sx={{
           display:{xs:"none", md:"inline"},
-          position:"absolute",
-          right:-5,
-          my:2,
-          bgcolor:"primary.light",
-          color:"common.white",
-          fontSize:"24px",
+          position:"fixed",
+          right:0,
+          top:170,
+          minHeight:"fit-content",
+          bgcolor:"grey.200",
+          color:"grey.500",
+          fontSize:"20px",
           p:1.1,
-          borderRadius:1
+          borderRadius:1,
+          writingMode: "vertical-rl",
+          textOrientation: "upright"
         }}
-      >Requested Items </Typography>
+      >REQUESTED ITEMS </Typography>
       <Stack
         direction={{ md: "row", xs: "column" }}
         sx={{
