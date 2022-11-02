@@ -37,7 +37,7 @@ function ImageCarousel() {
         display:"flex",
         flexDirection:{xs: "column", md:"row"},
         justifyContent:"space-between",
-        gap:2
+        gap:{xs:3, md:2}
       }}
     >
       <Box
@@ -113,7 +113,7 @@ function ImageCarousel() {
           display:"flex",
           flexDirection:{xs: "row", md:"column"},
           gap:2,
-          overflow:"hidden"
+          overflowX: "scroll",
         }}
       >
         {images.map(image => {

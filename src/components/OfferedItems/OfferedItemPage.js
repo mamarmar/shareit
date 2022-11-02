@@ -88,6 +88,7 @@ const OfferedItemPage = () => {
             maxWidth: 500,
             minWidth: 320,
             width:"50%",
+            mb:3
           }}
         >
           <Stack
