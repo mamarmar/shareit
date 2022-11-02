@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 //Components
 import RequestedItemCard from "../RequestedItems/RequestedItemCard";
 import OfferedItemCard from "../OfferedItems/OfferedItemCard";
@@ -7,11 +6,8 @@ import OfferedItemCard from "../OfferedItems/OfferedItemCard";
 import { useLocation } from "react-router-dom";
 //MUI
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 //Image
 import profilePic from "../../images/user-image.jpeg";
@@ -118,7 +114,7 @@ const UserProfile = () => {
                                 spacing={2}
                                 sx={{
                                     overflowX:"scroll",
-                                    webkitOverflowScrolling: "touch"
+                                    // webkitOverflowScrolling: "touch"
                                 }}
                             >
                             {user.itemsBorrowed.map(item=> {
@@ -157,7 +153,7 @@ const UserProfile = () => {
                                 spacing={2}
                                 sx={{
                                     overflowX:"scroll",
-                                    webkitOverflowScrolling: "touch"
+                                    // webkitOverflowScrolling: "touch"
                                 }}
                             >
                             {user.itemsLent.map(item=> {
