@@ -3,7 +3,6 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -57,39 +56,37 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box
+      <Stack
         component="form"
         onSubmit={handleSubmit((data) => filterItems(data))}
         noValidate
+        direction={{xs:"column", md:"row"}}
+        spacing={{xs:-1, md:4}}
         sx={{
-          pt: { xs: 2, md: 1 },
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          justifyContent: "flexStart",
+          pt: { xs:2, md: 1 },
           alignItems: "center",
-          gap: { md: 4 },
-          boxShadow: 3,
-          // px:3
+          boxShadow: 3
         }}
       >
         <Stack
           direction="row"
+          spacing= {{xs:1, md:3}}
           sx={{
             justifyContent: "space-between",
-            gap: {xs:1, md:3},
             mx: { xs: 2, md: 3 },
             mb: { xs: 0 },
           }}
         >
           <TextField
-            fullWidth
             id="itemName"
             label="Item Name"
             autoComplete="item-name"
             {...register("itemName")}
+            sx={{
+              minWidth:{ md:200},
+            }}
           />
           <Autocomplete
-            fullWidth
             disablePortal
             id="combo-box-demo"
             options={cities}
@@ -98,7 +95,14 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
               setCityValue(newValue);
             }}
             renderInput={(params) => (
-              <TextField {...params} label="City" {...register("city")} />
+              <TextField 
+                {...params}
+                label="City" 
+                {...register("city")} 
+                sx={{
+                  minWidth:{ md:200},
+                }}
+              />
             )}
             isOptionEqualToValue={(option, value) => option.id === value.id}
           />
@@ -109,6 +113,9 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
               id="category-select"
               label="Category"
               {...register("category")}
+              sx={{
+                minWidth:{ md:200},
+              }}
             >
               {categories.map((category) => (
                 <MenuItem key={category} value={category}>
@@ -122,8 +129,7 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
           direction="row"
           sx={{
             width: 200,
-            gap: {xs:1, md:3},
-            my: { xs: -1, md: 0 },
+            gap: {xs:1, md:3}
           }}
         >
           <Tooltip title="Apply filters">
@@ -157,7 +163,7 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
             </Button>
           </Tooltip>
         </Stack>
-      </Box>
+      </Stack>
     </ThemeProvider>
   );
 }
