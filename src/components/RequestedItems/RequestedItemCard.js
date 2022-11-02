@@ -35,7 +35,7 @@ export default function RequestedItemCard(props) {
   }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 245 }}>
       <Link
         component={CardActionArea}
         to={`/requested/${props.id}`}
@@ -53,8 +53,15 @@ export default function RequestedItemCard(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.itemName}
           </Typography>
-          <Typography gutterBottom variant="p" component="div">
-            {props.city}
+          <Typography
+            gutterBottom 
+            variant="p" 
+            component="div"
+            sx={{
+              fontSize:"14px",
+            }}
+          >
+            {(props.city.split(","))[0]}
           </Typography>
         </CardContent>
       </Link>

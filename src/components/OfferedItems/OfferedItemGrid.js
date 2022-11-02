@@ -11,6 +11,8 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   const [showSignUpPrompt, setShowSignUpPrompt] = React.useState(false);
@@ -54,7 +56,11 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   //Map over the incoming data and create an OfferedItemCard for every document
   const allOfferedItems = location.state.map((item) => {
     return (
-      <OfferedItemCard
+      <Grid
+        item 
+        xs={2}
+      >
+        <OfferedItemCard
         key={item._id}
         id={item._id}
         itemName={item.itemName}
@@ -62,6 +68,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
         city={item.city}
         setShowSignUpPrompt={setShowSignUpPrompt}
       />
+      </Grid>
     );
   });
 
@@ -79,7 +86,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   });
 
   return (
-    <div>
+    <div className="grid-container">
       {showFilterBar && (
         <FiltersBar
           setFilteredResults={setFilteredResults}
@@ -87,6 +94,20 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           showAlert={showAlert}
         />
       )}
+      <Typography
+        variant="h1"
+        sx={{
+          display:{xs:"none", md:"inline"},
+          position:"absolute",
+          right:-5,
+          my:2,
+          bgcolor:"primary.main",
+          color:"common.white",
+          fontSize:"24px",
+          p:1.1,
+          borderRadius:1
+        }}
+      >Offered Items </Typography>
       <Stack
         direction={{ md: "row", xs: "column" }}
         sx={{
@@ -121,12 +142,22 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           </Typography>
         )}
       </Stack>
+      
       {showSignUpPrompt && (
         <SignUpPrompt setShowSignUpPrompt={setShowSignUpPrompt} />
       )}
-      <div className="offered-items-grid">
+      <Grid 
+        container
+        spacing={{ xs: 2, md: 5}}
+        columns={{ xs: 3, sm: 6, md:9}}
+        justifyContent="center"
+        sx={{
+          py:6,
+          px:6,
+        }}
+      >
         {filteredResults ? filteredOfferedItems : allOfferedItems}
-      </div>
+      </Grid>
     </div>
   );
 }
