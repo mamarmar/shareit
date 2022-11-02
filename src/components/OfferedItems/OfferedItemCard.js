@@ -56,7 +56,7 @@ export default function OfferedItemCard(props) {
             component="img"
             height="140"
             image={pinkChair}
-            alt="colorful paper"
+            alt="pink chair"
           />
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
@@ -81,8 +81,8 @@ export default function OfferedItemCard(props) {
           <CardMedia
             component="img"
             height="140"
-            image={require("../../images/colorful-paper.jpeg")}
-            alt="colorful paper"
+            image={pinkChair}
+            alt="pink chair"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
