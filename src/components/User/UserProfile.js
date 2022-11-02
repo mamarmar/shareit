@@ -117,7 +117,8 @@ const UserProfile = () => {
                                 justifyContent={{xs:"center", md:"start"}}
                                 spacing={2}
                                 sx={{
-                                    overflowX:"scroll"
+                                    overflowX:"scroll",
+                                    webkitOverflowScrolling: "touch"
                                 }}
                             >
                             {user.itemsBorrowed.map(item=> {
@@ -155,7 +156,8 @@ const UserProfile = () => {
                                 justifyContent={{xs:"center", md:"start"}}
                                 spacing={2}
                                 sx={{
-                                    overflowX:"scroll"
+                                    overflowX:"scroll",
+                                    webkitOverflowScrolling: "touch"
                                 }}
                             >
                             {user.itemsLent.map(item=> {
