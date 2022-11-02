@@ -48,12 +48,13 @@ function ImageCarousel() {
           backgroundPosition:"center",
           backgroundRepeat:"no-repeat",
           width:{xs:"100%", md:"80%"},
-          height:{xs:320},
+          height:{xs:240, md:320},
           borderRadius:1,
-          display:"flex"
+          display:"flex",
+          
         }}
       >
-        <Box
+        {currImg !== 0 && <Box
           className="left"
           onClick={() => {
             currImg > 0 && setCurrImg(currImg - 1);
@@ -64,6 +65,7 @@ function ImageCarousel() {
             backgroundColor: "rgb(0,0,0, .2)",
             display:"flex",
             alignItems:"center",
+            cursor:"pointer"
             
           }}
         >
@@ -71,17 +73,16 @@ function ImageCarousel() {
             sx={{ 
               fontSize: 30,
               color:"common.white" ,
-              cursor:"pointer"
             }} 
           />
-        </Box>
+        </Box>}
         <Box
           sx={{
-            flex:"90%"
+            flex:"90%",
           }}
         >
         </Box>
-        <Box
+        {currImg !== images.length-1 && <Box
           className="right"
           onClick={() => {
             currImg < images.length - 1 && setCurrImg(currImg + 1);
@@ -91,23 +92,24 @@ function ImageCarousel() {
             height:"100%",
             backgroundColor: "rgb(0,0,0, .2)",
             display:"flex",
-            alignItems:"center"
+            alignItems:"center",
+            cursor:"pointer"
           }}
         >
           <ArrowForwardIosIcon 
             sx={{ 
               fontSize: 30,
               color:"common.white",
-              cursor:"pointer"
+              
             }} 
           />
-        </Box>
+        </Box>}
       </Box>
       <Box
         sx={{
           borderRadius:1,
           width: {xs:"100%", md:"20%"},
-          height: {xs:100, md:320},
+          height: {xs:60, md:320},
           display:"flex",
           flexDirection:{xs: "row", md:"column"},
           gap:2,
@@ -122,7 +124,7 @@ function ImageCarousel() {
               backgroundSize: "cover",
               backgroundPosition:"center",
               backgroundRepeat:"no-repeat",
-              height:120,
+              height:100,
               width:"100%",
               borderRadius:1
             }}

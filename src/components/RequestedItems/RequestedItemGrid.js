@@ -109,8 +109,9 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
           fontSize:"20px",
           p:1.1,
           borderRadius:1,
-          writingMode: "vertical-rl",
-          textOrientation: "upright"
+          writingMode: "vertical-lr",
+          letterSpacing:5,
+          // textOrientation: "upright"
         }}
       >REQUESTED ITEMS </Typography>
       <Stack

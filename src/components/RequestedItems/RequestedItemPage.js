@@ -183,12 +183,24 @@ const RequestedItemPage = () => {
           <Typography
             sx={{
                 fontSize:14,
-                mb:1
+                color:"grey.600",
             }}
           >
             Requested by
         </Typography>
-          <Stack direction="row" alignItems="baseline">
+          <Stack 
+            direction="row"
+            alignItems="center"
+            spacing={1}
+              sx={{
+                borderRadius:1,
+                bgcolor:"grey.200",
+                px:1,
+                py:2,
+                minWidth:140,
+                width:"40%"
+              }}
+          >
             <Tooltip title="Visit Profile">
             <Link
               to={`/user/${requestedItem.borrowedBy._id}`}
@@ -200,8 +212,8 @@ const RequestedItemPage = () => {
                 alt="user"
                 src={profilePic}
                 sx={{
-                  width: 70,
-                  height: 70,
+                  width: {xs:50, md:70},
+                  height: {xs:50, md:70},
                 }}
               />
             </Link>

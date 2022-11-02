@@ -109,7 +109,8 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           p:1.1,
           borderRadius:1,
           writingMode: "vertical-rl",
-          textOrientation: "upright"
+          letterSpacing:5,
+          // textOrientation: "upright"
         }}
       >
         OFFERED ITEMS{" "}
