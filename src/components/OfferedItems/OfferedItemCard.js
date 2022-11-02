@@ -8,6 +8,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
+//Images
+import pinkChair from "../../images/pinkChair.jpg";
 
 export default function OfferedItemCard(props) {
   const [currentOfferedItem, setCurrentOfferedItem] = React.useState();
@@ -53,7 +55,7 @@ export default function OfferedItemCard(props) {
           <CardMedia
             component="img"
             height="140"
-            image={require("../../images/colorful-paper.jpeg")}
+            image={pinkChair}
             alt="colorful paper"
           />
           <CardContent>
