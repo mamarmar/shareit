@@ -11,14 +11,13 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 
 export default function RequestedItemCard(props) {
   const [currentRequestedItem, setCurrentRequestedItem] = React.useState();
-  
+
   React.useEffect(() => {
     handleClick();
-  },[]);
+  }, []);
 
   //Go to item page
   async function handleClick() {
-    console.log(props.id)
     const token = localStorage.getItem("shareItToken");
     let config = {
       headers: { "x-access-token": token },
@@ -51,17 +50,19 @@ export default function RequestedItemCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-          {props.itemName.length < 13 ? props.itemName : `${props.itemName.substring(0, 11)}...`}
+            {props.itemName.length < 13
+              ? props.itemName
+              : `${props.itemName.substring(0, 11)}...`}
           </Typography>
           <Typography
-            gutterBottom 
-            variant="p" 
+            gutterBottom
+            variant="p"
             component="div"
             sx={{
-              fontSize:"14px",
+              fontSize: "14px",
             }}
           >
-            {(props.city.split(","))[0]}
+            {props.city.split(",")[0]}
           </Typography>
         </CardContent>
       </Link>

@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import PinDropIcon from '@mui/icons-material/PinDrop';
 
 export default function OfferedItemCard(props) {
   const [currentOfferedItem, setCurrentOfferedItem] = React.useState();
@@ -17,7 +15,7 @@ export default function OfferedItemCard(props) {
 
   React.useEffect(() => {
     handleClick();
-  },[]);
+  }, []);
 
   function showSignUpPrompt() {
     props.setShowSignUpPrompt(true);
@@ -34,17 +32,16 @@ export default function OfferedItemCard(props) {
         config
       );
       setCurrentOfferedItem(res.data.data[0]);
-      // console.log(res.data.data[0])
     } catch (err) {
       console.log({ error: err });
     }
   }
   return (
-    <Card 
-      sx={{ 
-        maxWidth: 345 
-      }
-    }>
+    <Card
+      sx={{
+        maxWidth: 345,
+      }}
+    >
       {token ? (
         <Link
           component={CardActionArea}
@@ -60,22 +57,20 @@ export default function OfferedItemCard(props) {
             alt="colorful paper"
           />
           <CardContent>
-            <Typography 
-              gutterBottom
-              variant="h6"
-              component="div"
-            >
-              {props.itemName.length < 13 ? props.itemName : `${props.itemName.substring(0, 11)}...`}
+            <Typography gutterBottom variant="h6" component="div">
+              {props.itemName.length < 13
+                ? props.itemName
+                : `${props.itemName.substring(0, 11)}...`}
             </Typography>
-              <Typography 
+            <Typography
               gutterBottom
               variant="p"
               component="div"
               sx={{
-                fontSize:"14px",
+                fontSize: "14px",
               }}
             >
-              {(props.city.split(","))[0]}
+              {props.city.split(",")[0]}
             </Typography>
           </CardContent>
         </Link>
@@ -89,17 +84,19 @@ export default function OfferedItemCard(props) {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {props.itemName}
+              {props.itemName.length < 13
+                ? props.itemName
+                : `${props.itemName.substring(0, 11)}...`}
             </Typography>
-            <Typography 
+            <Typography
               gutterBottom
               variant="p"
               component="div"
               sx={{
-                fontSize:"14px",
+                fontSize: "14px",
               }}
             >
-              {(props.city.split(","))[0]}
+              {props.city.split(",")[0]}
             </Typography>
           </CardContent>
         </CardActionArea>

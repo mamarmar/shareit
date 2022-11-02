@@ -39,7 +39,10 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
       },
     };
     try {
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/offereditems/search`,config);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/offereditems/search`,
+        config
+      );
       setShowAlert(false);
       if (res.data.data.length === 0) {
         setShowAlert(true);
@@ -55,32 +58,31 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   //Map over the incoming data and create an OfferedItemCard for every document
   const allOfferedItems = location.state.map((item) => {
     return (
-      <Grid
-        item 
-        xs={2}
-      >
+      <Grid item xs={2}>
         <OfferedItemCard
-        key={item._id}
-        id={item._id}
-        itemName={item.itemName}
-        itemImages={item.itemImages}
-        city={item.city}
-        setShowSignUpPrompt={setShowSignUpPrompt}
-      />
+          key={item._id}
+          id={item._id}
+          itemName={item.itemName}
+          itemImages={item.itemImages}
+          city={item.city}
+          setShowSignUpPrompt={setShowSignUpPrompt}
+        />
       </Grid>
     );
   });
 
   const filteredOfferedItems = offeredItems.map((item) => {
     return (
-      <OfferedItemCard
-        key={item._id}
-        id={item._id}
-        itemName={item.itemName}
-        itemImages={item.itemImages}
-        city={item.city}
-        setShowSignUpPrompt={setShowSignUpPrompt}
-      />
+      <Grid item xs={2}>
+        <OfferedItemCard
+          key={item._id}
+          id={item._id}
+          itemName={item.itemName}
+          itemImages={item.itemImages}
+          city={item.city}
+          setShowSignUpPrompt={setShowSignUpPrompt}
+        />
+      </Grid>
     );
   });
 
@@ -96,17 +98,19 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
       <Typography
         variant="h1"
         sx={{
-          display:{xs:"none", md:"inline"},
-          position:"absolute",
-          right:-5,
-          my:2,
-          bgcolor:"primary.main",
-          color:"common.white",
-          fontSize:"24px",
-          p:1.1,
-          borderRadius:1
+          display: { xs: "none", md: "inline" },
+          position: "absolute",
+          right: -5,
+          my: 2,
+          bgcolor: "primary.light",
+          color: "common.white",
+          fontSize: "24px",
+          p: 1.1,
+          borderRadius: 1,
         }}
-      >Offered Items </Typography>
+      >
+        Offered Items{" "}
+      </Typography>
       <Stack
         direction={{ md: "row", xs: "column" }}
         sx={{
@@ -133,7 +137,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           <Typography
             sx={{
               color: "warning.main",
-              textAlign:"center"
+              textAlign: "center",
             }}
           >
             There are no results matching your search. Please modify your
@@ -141,18 +145,18 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           </Typography>
         )}
       </Stack>
-      
+
       {showSignUpPrompt && (
         <SignUpPrompt setShowSignUpPrompt={setShowSignUpPrompt} />
       )}
-      <Grid 
+      <Grid
         container
-        spacing={{ xs: 2, md: 5}}
-        columns={{ xs: 3, sm: 6, md:9}}
+        spacing={{ xs: 2, md: 5 }}
+        columns={{ xs: 3, sm: 6, md: 9 }}
         justifyContent="center"
         sx={{
-          py:6,
-          px:6,
+          py: 6,
+          px: 6,
         }}
       >
         {filteredResults ? filteredOfferedItems : allOfferedItems}

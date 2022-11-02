@@ -19,7 +19,6 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
 
   const location = useLocation();
 
-  console.log(requestedItems);
   React.useEffect(() => {
     filterItems();
   });
