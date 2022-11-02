@@ -36,7 +36,12 @@ export default function RequestedItemCard(props) {
   }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card 
+      sx={{ 
+        maxWidth: 345,
+        minWidth: 150
+        }}
+    >
       <Link
         component={CardActionArea}
         to={`/requested/${props.id}`}

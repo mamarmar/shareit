@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 //Bootstrap
 // import Carousel from 'react-bootstrap/Carousel';
 import pinkChair from "../images/pinkChair.jpg";
@@ -32,6 +32,7 @@ function ImageCarousel() {
   ];
 
   return (
+    //Container of image carousel and image thumbnails
     <Box
       sx={{
         display:"flex",
@@ -40,8 +41,8 @@ function ImageCarousel() {
         gap:{xs:3, md:2}
       }}
     >
+      {/* Image Carousel */}
       <Box
-        className="carouselInner"
         sx={{ 
           backgroundImage:`url(${images[currImg].path})`,
           backgroundSize: "cover",
@@ -55,7 +56,6 @@ function ImageCarousel() {
         }}
       >
         {currImg !== 0 && <Box
-          className="left"
           onClick={() => {
             currImg > 0 && setCurrImg(currImg - 1);
           }}
@@ -83,7 +83,6 @@ function ImageCarousel() {
         >
         </Box>
         {currImg !== images.length-1 && <Box
-          className="right"
           onClick={() => {
             currImg < images.length - 1 && setCurrImg(currImg + 1);
           }}
@@ -105,6 +104,7 @@ function ImageCarousel() {
           />
         </Box>}
       </Box>
+      {/* Image thumbnail container */}
       <Box
         sx={{
           borderRadius:1,
@@ -116,11 +116,11 @@ function ImageCarousel() {
           overflowX: "scroll",
         }}
       >
-        {images.map(image => {
+        {images.map(item => {
           return <Box
-            key={image.id}
+            key={item.id}
             sx={{
-              backgroundImage:`url(${image.path})`,
+              backgroundImage:`url(${item.path})`,
               backgroundSize: "cover",
               backgroundPosition:"center",
               backgroundRepeat:"no-repeat",

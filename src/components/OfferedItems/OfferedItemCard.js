@@ -42,6 +42,7 @@ export default function OfferedItemCard(props) {
     <Card
       sx={{
         maxWidth: 345,
+        minWidth: 150
       }}
     >
       {token ? (
