@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
 function RequestedItemGrid({ requestedItems, setRequestedItems }) {
   const [filteredResults, setFilteredResults] = React.useState(false);
@@ -59,6 +60,10 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
   //Map over the incoming data and create a RequestedItemCard for every document
   const allRequestedItems = location.state.map((item) => {
     return (
+      <Grid
+        item 
+        xs={2}
+      >
       <RequestedItemCard
         key={item._id}
         id={item._id}
@@ -66,6 +71,7 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
         itemImages={item.itemImages}
         city={item.city}
       />
+      </Grid>
     );
   });
 
@@ -90,6 +96,20 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
           showAlert={showAlert}
         />
       )}
+      <Typography
+        variant="h1"
+        sx={{
+          display:{xs:"none", md:"inline"},
+          position:"absolute",
+          right:-5,
+          my:2,
+          bgcolor:"primary.light",
+          color:"common.white",
+          fontSize:"24px",
+          p:1.1,
+          borderRadius:1
+        }}
+      >Requested Items </Typography>
       <Stack
         direction={{ md: "row", xs: "column" }}
         sx={{
@@ -124,9 +144,18 @@ function RequestedItemGrid({ requestedItems, setRequestedItems }) {
           </Typography>
         )}
       </Stack>
-      <div className="offered-items-grid">
+      <Grid 
+        container
+        spacing={{ xs: 2, md: 5}}
+        columns={{ xs: 3, sm: 6, md:9}}
+        justifyContent="center"
+        sx={{
+          py:6,
+          px:6,
+        }}
+      >
         {filteredResults ? filteredRequestedItems : allRequestedItems}
-      </div>
+      </Grid>
     </div>
   );
 }

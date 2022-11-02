@@ -35,7 +35,7 @@ export default function RequestedItemCard(props) {
   }
 
   return (
-    <Card sx={{ width: 245 }}>
+    <Card sx={{ maxWidth: 345 }}>
       <Link
         component={CardActionArea}
         to={`/requested/${props.id}`}
@@ -51,7 +51,7 @@ export default function RequestedItemCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {props.itemName}
+          {props.itemName.length < 13 ? props.itemName : `${props.itemName.substring(0, 11)}...`}
           </Typography>
           <Typography
             gutterBottom 

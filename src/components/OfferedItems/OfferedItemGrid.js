@@ -12,7 +12,6 @@ import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 
 function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   const [showSignUpPrompt, setShowSignUpPrompt] = React.useState(false);
@@ -86,7 +85,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
   });
 
   return (
-    <div className="grid-container">
+    <div>
       {showFilterBar && (
         <FiltersBar
           setFilteredResults={setFilteredResults}
