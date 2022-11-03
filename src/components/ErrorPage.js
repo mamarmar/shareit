@@ -27,7 +27,7 @@ function ErrorPage() {
         404 Error. This page does not exist.
       </Typography>
       <Link
-        tp="/"
+        to="/"
         style={{
           color: "#03A9F4",
         }}

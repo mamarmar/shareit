@@ -41,18 +41,18 @@ function Homepage({ offeredItems, setOfferedItems }) {
           mt: { xs: 15, md: 20, xl: 30 },
         }}
       >
-        <Image
+        {/* <Image
           src={logo}
           alt="logo"
           width={{ xs: 200, md: 300 }}
           component="a"
           duration={0}
-        />
+        /> */}
         <Stack spacing={1} alignItems={{ xs: "center", md: "start" }}>
           <Typography
-            variant="p"
+            variant="h1"
             sx={{
-              fontSize: 20,
+              fontSize: {xs:26,md:60},
               textAlign: { xs: "center", md: "left" },
             }}
           >
