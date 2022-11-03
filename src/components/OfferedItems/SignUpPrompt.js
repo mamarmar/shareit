@@ -20,8 +20,8 @@ function SignUpPrompt({ setShowSignUpPrompt }) {
         top: {xs:"50%", md:"45%"},
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: {xs: 300,md:300},
-        height:{xs:240, md:240},
+        width: {xs: 270,md:300},
+        height:{xs:210, md:240},
         bgcolor: "common.white",
         boxShadow: 24,
         p: 2,
@@ -48,7 +48,7 @@ function SignUpPrompt({ setShowSignUpPrompt }) {
         variant="p"
         sx={{
           fontWeight:300,
-          fontSize:{xs:28, md:22},
+          fontSize:{xs:24, md:22},
           textAlign:"center"
         }}
       >
