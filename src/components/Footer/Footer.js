@@ -2,10 +2,11 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-
-
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+//React Router
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -20,25 +21,84 @@ export default function Footer() {
       <Box
         component="footer"
         sx={{
-          py: 3,
+          py: 2,
           px: 2,
           mt: "auto",
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[200]
-              : theme.palette.grey[800],
+          height: 100,
+          bgcolor: "common.white",
+          boxShadow: 7,
         }}
       >
-        <Container maxWidth="sm">
-          <Typography variant="body2">
-            <Link color="inherit" href="https://mui.com/">
-              About Us
-            </Link>{" "}
-            <Link color="inherit" href="https://mui.com/">
-              How it works
-            </Link>{" "}
-          </Typography>
-        </Container>
+        <Box
+          fullWidth
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <Stack direction="row" justifyContent={"space-around"}>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <Button>Home</Button>
+            </Link>
+            <Link
+              to="/about"
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <Button>About Us</Button>
+            </Link>
+            <Link
+              to="/howitworks"
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <Button>How it works</Button>
+            </Link>
+          </Stack>
+          <Stack
+            direction="row"
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Typography
+              sx={{
+                fontSize: 13,
+              }}
+            >
+              Made with&nbsp;
+            </Typography>
+            <FavoriteIcon
+              sx={{
+                color: "primary.light",
+                fontSize: 13,
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: 13,
+              }}
+            >
+              &nbsp;by&nbsp;
+              <Link
+                href="https://github.com/mamarmar"
+                style={{
+                  textDecoration: "none",
+                  color: "#50C3F7",
+                }}
+              >
+                Margarita Marmaridou
+              </Link>
+            </Typography>
+          </Stack>
+        </Box>
       </Box>
     </Box>
   );
