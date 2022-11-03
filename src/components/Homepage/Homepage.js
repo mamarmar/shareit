@@ -42,8 +42,8 @@ function Homepage({ offeredItems, setOfferedItems }) {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: 26, md: 60 },
-              textAlign: { xs: "center", md: "left" },
+              fontSize: { xs: 48, md: 60 },
+              textAlign: "left",
             }}
           >
             Borrow & lend items within your community.
