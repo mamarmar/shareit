@@ -86,16 +86,7 @@ export default function Footer() {
                 fontSize: 13,
               }}
             >
-              &nbsp;by&nbsp;
-              <Link
-                href="https://github.com/mamarmar"
-                style={{
-                  textDecoration: "none",
-                  color: "#50C3F7",
-                }}
-              >
-                Margarita Marmaridou
-              </Link>
+              &nbsp;by Margarita Marmaridou
             </Typography>
           </Stack>
         </Box>
