@@ -1,12 +1,9 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import CampaignIcon from '@mui/icons-material/Campaign';
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
@@ -17,9 +14,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
 //React Router
-import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 function HowItWorks() {
@@ -56,7 +51,7 @@ function HowItWorks() {
 
   return (
     <Box
-    id="top"
+      id="top"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -218,31 +213,32 @@ function HowItWorks() {
           </ListItem>
         </List>
         <HashLink
-                  to="/howitworks#top"
-                  style={{
-                    color: "#03A9F4",
-                  }}
-                >
-                  Back to top
-                </HashLink>
+          to="/howitworks#top"
+          style={{
+            color: "#03A9F4",
+          }}
+        >
+          Back to top
+        </HashLink>
       </Stack>
-      <Stack direction="column"
+      <Stack
+        direction="column"
         justifyContent="center"
         alignItems="center"
         color="grey.600"
       >
         <FavoriteIcon />
         <Typography
-            sx={{
-                textAlign:"center"
-            }}
+          sx={{
+            textAlign: "center",
+          }}
         >
-            Share the word to expand our community & do your part in reducing your ecological foorprint, 
-            in line with the first of the '3 Rs' of waste management (Reduce, Reuse, Recycle). 
-            Sharing is caring & we care about our planet!
+          Share the word to expand our community. Remember that by using shareit
+          you do your part in reducing your ecological foorprint, in line with
+          the first of the '3 Rs' of waste management (Reduce, Reuse, Recycle).
+          Sharing is caring & we care about our planet!
         </Typography>
       </Stack>
-      
     </Box>
   );
 }

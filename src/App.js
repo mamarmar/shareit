@@ -22,6 +22,7 @@ import RequestedItemGrid from "./components/RequestedItems/RequestedItemGrid";
 import RequestedItemPage from "./components/RequestedItems/RequestedItemPage";
 import Footer from "./components/Footer/Footer";
 import UserProfile from "./components/User/UserProfile";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const [offeredItems, setOfferedItems] = React.useState([]);
@@ -73,7 +74,7 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Homepage offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>} />
-          <Route path="/about" element={<About />} />
+          <Route element={<About />} />
           <Route path="/howitworks" element={<HowItWorks />} />
           <Route path="/signup" element={<SignupForm />} />
           <Route
@@ -107,6 +108,7 @@ function App() {
           />
           <Route path="/requested/:id" element={<RequestedItemPage />} />
           <Route path="/user/:id" element={<UserProfile />} />
+          <Route path="/*" element={<ErrorPage />}/>
         </Routes>
         <Footer />
       </div>
