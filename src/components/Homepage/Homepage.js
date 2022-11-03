@@ -3,10 +3,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Image from "mui-image";
 import Button from "@mui/material/Button";
-//Logo
-import logo from "../../images/logo.svg";
 //React Router
 import { Link } from "react-router-dom";
 
@@ -41,18 +38,11 @@ function Homepage({ offeredItems, setOfferedItems }) {
           mt: { xs: 15, md: 20, xl: 30 },
         }}
       >
-        {/* <Image
-          src={logo}
-          alt="logo"
-          width={{ xs: 200, md: 300 }}
-          component="a"
-          duration={0}
-        /> */}
         <Stack spacing={1} alignItems={{ xs: "center", md: "start" }}>
           <Typography
             variant="h1"
             sx={{
-              fontSize: {xs:26,md:60},
+              fontSize: { xs: 26, md: 60 },
               textAlign: { xs: "center", md: "left" },
             }}
           >
