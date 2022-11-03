@@ -277,7 +277,7 @@ const Header = ({
               <Image
                 src={logo}
                 alt="logo"
-                width="110px"
+                width="100px"
                 component="a"
                 duration={0}
               />
