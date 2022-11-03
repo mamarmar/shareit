@@ -4,6 +4,7 @@ import axios from "axios";
 import OfferedItemCard from "./OfferedItemCard";
 import FiltersBar from "../FiltersBar";
 import SignUpPrompt from "./SignUpPrompt";
+import PopUp from "../PopUp";
 //React Router
 import { useLocation } from "react-router-dom";
 //MUI
@@ -81,6 +82,7 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           itemImages={item.itemImages}
           city={item.city}
           setShowSignUpPrompt={setShowSignUpPrompt}
+          // setOpen={setOpen}
         />
       </Grid>
     );
@@ -110,7 +112,6 @@ function OfferedItemGrid({ offeredItems, setOfferedItems }) {
           borderRadius:1,
           writingMode: "vertical-rl",
           letterSpacing:5,
-          // textOrientation: "upright"
         }}
       >
         OFFERED ITEMS{" "}
