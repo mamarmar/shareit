@@ -72,7 +72,7 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>} />
           <Route path="/about" element={<About />} />
           <Route path="/howitworks" element={<HowItWorks />} />
           <Route path="/signup" element={<SignupForm />} />
