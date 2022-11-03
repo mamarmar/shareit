@@ -63,7 +63,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 duration={0}
                 sx={{
                   mr: 2,
-                  display: { xs: "none", md: "flex" }
+                  display: { xs: "none", md: "flex" },
                 }}
               />
             </Link>
@@ -113,9 +113,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                   onClick={handleCloseNavMenu}
                   sx={{ color: "common.black" }}
                 >
-                  <Typography textAlign="center">
-                    Offered Items
-                  </Typography>
+                  <Typography textAlign="center">Offered Items</Typography>
                 </MenuItem>
               </Link>
               <Link to="/howitworks" style={{ textDecoration: "none" }}>
@@ -126,21 +124,13 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                   <Typography textAlign="center">How it Works</Typography>
                 </MenuItem>
               </Link>
-              <Link to="/about" style={{ textDecoration: "none" }}>
-                <MenuItem
-                  onClick={handleCloseNavMenu}
-                  sx={{ color: "common.black" }}
-                >
-                  <Typography textAlign="center">About us</Typography>
-                </MenuItem>
-              </Link>
             </Menu>
           </Box>
           <Box
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
-              flexGrow: 1
+              flexGrow: 1,
             }}
           >
             <Link to="/">
@@ -187,16 +177,6 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 How it works
               </Button>
             </Link>
-            <Link to="/about" style={{ textDecoration: "none" }}>
-              <Button
-                sx={{
-                  color: "common.black",
-                  display: "block",
-                }}
-              >
-                About us
-              </Button>
-            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "flex" } }}>
@@ -206,7 +186,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                   fontWeight: "bold",
                   marginRight: "5px",
                   whiteSpace: "no-wrap",
-                  minWidth: "max-content"
+                  minWidth: "max-content",
                 }}
                 variant="outlined"
               >
@@ -218,9 +198,9 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
                 variant="contained"
                 sx={{
                   fontWeight: "bold",
-                  color:"common.white",
+                  color: "common.white",
                   whiteSpace: "no-wrap",
-                  minWidth: "max-content"
+                  minWidth: "max-content",
                 }}
               >
                 Sign up

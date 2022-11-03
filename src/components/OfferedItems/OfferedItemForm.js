@@ -153,6 +153,8 @@ export default function OfferedItemForm() {
               <Grid item xs={12}>
               <TextField
                   fullWidth
+                  multiline
+                  rows={2}
                   id="description"
                   label="Description"
                   autoComplete="description"

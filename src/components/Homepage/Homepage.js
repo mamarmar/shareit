@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Image from "mui-image";
 import Button from "@mui/material/Button";
-import Divider from '@mui/material/Divider';
 //Logo
 import logo from "../../images/logo.svg";
 //React Router

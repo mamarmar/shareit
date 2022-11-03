@@ -152,6 +152,8 @@ export default function RequestedItemForm() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  multiline
+                  rows={2}
                   fullWidth
                   id="description"
                   label="Description"
