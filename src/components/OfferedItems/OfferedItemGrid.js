@@ -4,7 +4,6 @@ import axios from "axios";
 import OfferedItemCard from "./OfferedItemCard";
 import FiltersBar from "../FiltersBar";
 import SignUpPrompt from "./SignUpPrompt";
-import PopUp from "../PopUp";
 //React Router
 import { useLocation } from "react-router-dom";
 //MUI

@@ -96,7 +96,6 @@ function PopUp({ setShowPopUp, offeredItem }) {
         setErrorMessage("Please type a message");
       }
     } catch (err) {
-      console.log({ Error: err });
       setUnsuccessfulSubmit(true);
       setErrorMessage(err.response.data);
     }
