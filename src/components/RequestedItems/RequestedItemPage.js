@@ -88,7 +88,7 @@ const RequestedItemPage = () => {
           <DeletePopUp
             setShowDeletePopUp={setShowDeletePopUp}
             requestedItem={requestedItem}
-            currentUserId={currentUserId}
+            // currentUserId={currentUserId}
           />
         )}
         <Stack
