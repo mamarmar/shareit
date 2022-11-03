@@ -46,7 +46,7 @@ export default function Footer() {
             >
               <Button>Home</Button>
             </Link>
-              <Button disabled>About Us</Button>
+            <Button disabled>About Us</Button>
             <Link
               to="/howitworks"
               style={{

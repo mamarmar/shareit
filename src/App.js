@@ -36,22 +36,23 @@ function App() {
       },
       primary: {
         main: colors.lightBlue[500],
-        light:colors.lightBlue[300],
-        dark:colors.lightBlue[700]
+        light: colors.lightBlue[300],
+        dark: colors.lightBlue[700],
       },
       error: {
-        main:colors.red[500]
-      }, success: {
-        main:colors.lightGreen[500]
-      }
+        main: colors.red[500],
+      },
+      success: {
+        main: colors.lightGreen[500],
+      },
     },
     typography: {
-      fontFamily:"Poppins",
-      fontWeightLight:300,
-      fontWeightRegular:400,
-      fontWeightMedium:500,
-      fontWeightBold:700
-    }
+      fontFamily: "Poppins",
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+      fontWeightBold: 700,
+    },
   });
 
   return (
@@ -73,7 +74,15 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/" element={<Homepage offeredItems={offeredItems} setOfferedItems={setOfferedItems}/>} />
+          <Route
+            path="/"
+            element={
+              <Homepage
+                offeredItems={offeredItems}
+                setOfferedItems={setOfferedItems}
+              />
+            }
+          />
           <Route element={<About />} />
           <Route path="/howitworks" element={<HowItWorks />} />
           <Route path="/signup" element={<SignupForm />} />
@@ -108,7 +117,7 @@ function App() {
           />
           <Route path="/requested/:id" element={<RequestedItemPage />} />
           <Route path="/user/:id" element={<UserProfile />} />
-          <Route path="/*" element={<ErrorPage />}/>
+          <Route path="/*" element={<ErrorPage />} />
         </Routes>
         <Footer />
       </div>

@@ -28,7 +28,7 @@ function Homepage({ offeredItems, setOfferedItems }) {
       sx={{
         display: "flex",
         flexDirection: "column",
-        alignItems: { xs: "center", md: "start" }
+        alignItems: { xs: "center", md: "start" },
       }}
     >
       <Stack
@@ -38,7 +38,7 @@ function Homepage({ offeredItems, setOfferedItems }) {
         sx={{
           width: { xs: 300, md: "60%" },
           mx: { xs: 0, md: 20 },
-          mt: { xs: 15, md: 20, xl:30 },
+          mt: { xs: 15, md: 20, xl: 30 },
         }}
       >
         <Image
@@ -53,7 +53,7 @@ function Homepage({ offeredItems, setOfferedItems }) {
             variant="p"
             sx={{
               fontSize: 20,
-              textAlign: { xs: "center", md: "left" }
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             Borrow & lend items within your community.
