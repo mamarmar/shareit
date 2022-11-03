@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 //Logo
 import logo from "../../images/logo.svg";
-import profilePic from "../../images/user-image.jpeg"
+import profilePic from "../../images/user-image.jpeg";
 //Context
 import { AuthContext } from "../../context/UserContext";
 //React Router
@@ -31,10 +31,6 @@ const Header = ({
   requestedItems,
   setRequestedItems,
 }) => {
-  
-  const [input, setInput] = React.useState({
-    itemName: "",
-  });
   const [currentUser, setCurrentUser] = React.useState({});
 
   const { handleLogOut } = React.useContext(AuthContext);
@@ -50,28 +46,6 @@ const Header = ({
   React.useEffect(() => {
     getAllRequestedItems();
   }, []);
-
-  //Handle change of multiple inputs
-  function handleChange(e) {
-    setInput((prevInput) => {
-      return {
-        ...prevInput,
-        [e.target.name]: e.target.value,
-      };
-    });
-  }
-
-  // Search for item based on item name (using the query parameters)
-  function handleSubmit(e) {
-    e.preventDefault();
-    const itemName = input.itemName;
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/search=${itemName}`)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.error(err));
-  }
 
   //Go to user profile
   async function handleProfileClick() {
@@ -171,18 +145,6 @@ const Header = ({
               />
             </Link>
           </Box>
-          {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-            <TextField
-              fullWidth
-              id="itemName"
-              name="itemName"
-              value={input.itemName}
-              placeholder="Search offered items..."
-              autofocus
-              onChange={handleChange}
-            />
-          </Box> */}
-
           <Box
             sx={{
               flexGrow: 1,
@@ -228,9 +190,7 @@ const Header = ({
                   onClick={handleCloseNavMenu}
                   sx={{ color: "common.black" }}
                 >
-                  <Typography textAlign="center">
-                    Offered Items
-                  </Typography>
+                  <Typography textAlign="center">Offered Items</Typography>
                 </MenuItem>
               </Link>
               <Link
@@ -243,9 +203,7 @@ const Header = ({
                   onClick={handleCloseNavMenu}
                   sx={{ color: "common.black" }}
                 >
-                  <Typography textAlign="center">
-                    Requested Items
-                  </Typography>
+                  <Typography textAlign="center">Requested Items</Typography>
                 </MenuItem>
               </Link>
               <Link to="/offered/new" style={{ textDecoration: "none" }}>
@@ -283,7 +241,9 @@ const Header = ({
               />
             </Link>
           </Box>
-          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" },gap:2 }}>
+          <Box
+            sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }, gap: 2 }}
+          >
             <Link
               to={"/offered/visitor"}
               style={{ textDecoration: "none" }}
@@ -292,7 +252,12 @@ const Header = ({
             >
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold",}}
+                sx={{
+                  my: 2,
+                  color: "common.black",
+                  display: "block",
+                  fontWeight: "bold",
+                }}
               >
                 Offered Items
               </Button>
@@ -305,7 +270,12 @@ const Header = ({
             >
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold", }}
+                sx={{
+                  my: 2,
+                  color: "common.black",
+                  display: "block",
+                  fontWeight: "bold",
+                }}
               >
                 Requested Items
               </Button>
@@ -313,16 +283,26 @@ const Header = ({
             <Link to={"/offered/new"} style={{ textDecoration: "none" }}>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold", }}
+                sx={{
+                  my: 2,
+                  color: "common.black",
+                  display: "block",
+                  fontWeight: "bold",
+                }}
               >
                 Offer an Item
               </Button>
             </Link>
-            
-            <Link to={"/requested/new"} style={{ textDecoration: "none" }} >
+
+            <Link to={"/requested/new"} style={{ textDecoration: "none" }}>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "common.black", display: "block", fontWeight: "bold", }}
+                sx={{
+                  my: 2,
+                  color: "common.black",
+                  display: "block",
+                  fontWeight: "bold",
+                }}
               >
                 Request an Item
               </Button>
@@ -336,7 +316,7 @@ const Header = ({
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px"}}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -357,19 +337,22 @@ const Header = ({
                 onClick={handleProfileClick}
                 style={{ textDecoration: "none" }}
               >
-                <MenuItem onClick={handleCloseUserMenu} sx={{color:'common.black'}}>
+                <MenuItem
+                  onClick={handleCloseUserMenu}
+                  sx={{ color: "common.black" }}
+                >
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
               </Link>
-              <Link
-                to={`howitworks`}
-                style={{ textDecoration: "none"}}
-              >
-                <MenuItem onClick={handleCloseUserMenu} sx={{color:'common.black'}}>
+              <Link to={`howitworks`} style={{ textDecoration: "none" }}>
+                <MenuItem
+                  onClick={handleCloseUserMenu}
+                  sx={{ color: "common.black" }}
+                >
                   <Typography textAlign="center">How it works</Typography>
                 </MenuItem>
               </Link>
-              <MenuItem onClick={logOut} sx={{color:'common.black'}}>
+              <MenuItem onClick={logOut} sx={{ color: "common.black" }}>
                 <Typography textAlign="center">Log out</Typography>
               </MenuItem>
             </Menu>
