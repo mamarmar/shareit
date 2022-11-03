@@ -46,14 +46,7 @@ export default function Footer() {
             >
               <Button>Home</Button>
             </Link>
-            <Link
-              to="/about"
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              <Button>About Us</Button>
-            </Link>
+              <Button disabled>About Us</Button>
             <Link
               to="/howitworks"
               style={{
