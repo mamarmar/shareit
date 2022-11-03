@@ -200,7 +200,7 @@ const OfferedItemPage = () => {
                 color: "grey.600",
               }}
             >
-              Requested by
+              Offered by
             </Typography>
             <Stack 
               direction="row"

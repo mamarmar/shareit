@@ -4,6 +4,16 @@ import axios from "axios";
 import decode from "jwt-decode";
 //EmailJS
 import { send } from "emailjs-com";
+//MUI
+import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 function PopUp({ setShowPopUp, offeredItem }) {
   const [toSend, setToSend] = React.useState({
@@ -14,6 +24,9 @@ function PopUp({ setShowPopUp, offeredItem }) {
     offeredItem: "",
     reply_to: "",
   });
+  const [successfulSubmit, setSuccessfulSubmit] = React.useState(false);
+  const [unsuccessfulSubmit, setUnsuccessfulSubmit] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   React.useEffect(() => {
     updateState();
@@ -64,16 +77,28 @@ function PopUp({ setShowPopUp, offeredItem }) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      updateState();
-      const res = await send(
-        "service_t9haahr",
-        "template_zuyolh9",
-        toSend,
-        "pNxISdWFiXKTiASCC"
-      );
-      console.log("SUCCESS!", res.status, res.text);
+      if (toSend.message.length > 0) {
+        updateState();
+        const res = await send(
+          "service_t9haahr",
+          "template_zuyolh9",
+          toSend,
+          "pNxISdWFiXKTiASCC"
+        );
+        setUnsuccessfulSubmit(false);
+        setSuccessfulSubmit(true);
+        setTimeout(() => {
+          closePopUp();
+        }, 1000);
+      } else {
+        setSuccessfulSubmit(false);
+        setUnsuccessfulSubmit(true);
+        setErrorMessage("Please type a message");
+      }
     } catch (err) {
       console.log({ Error: err });
+      setUnsuccessfulSubmit(true);
+      setErrorMessage(err.response.data);
     }
   }
 
@@ -82,24 +107,110 @@ function PopUp({ setShowPopUp, offeredItem }) {
   }
 
   return (
-    <div className="pop-up">
-      <p className="close-pop-up" onClick={closePopUp}>
-        X
-      </p>
-      <h1>
+    <Box
+      sx={{
+        borderRadius: 1,
+        position: "fixed",
+        top: { xs: "50%", md: "45%" },
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: { xs: 320, md: 480 },
+        height: { xs: 400, md: 400 },
+        bgcolor: "common.white",
+        boxShadow: 24,
+        zIndex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Tooltip title="Exit">
+        <CloseIcon
+          onClick={closePopUp}
+          sx={{
+            fontSize: { xs: 32, md: 30 },
+            alignSelf: "end",
+            cursor: "pointer",
+            position: "absolute",
+            top: { xs: -15, md: 5 },
+            right: { xs: -15, md: 2 },
+          }}
+        ></CloseIcon>
+      </Tooltip>
+      <Typography
+        variant="h3"
+        sx={{
+          pb: 0,
+          fontSize: 20,
+          mt: 5,
+        }}
+      >
         Request item from {offeredItem.offeredBy.firstName}
-      </h1>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          type="text"
+      </Typography>
+
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        noValidate
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+
+          height: { xs: 270, md: 270 },
+        }}
+      >
+        <TextField
+          multiline
+          placeholder="Type your message..."
+          autoFocus
+          rows={6}
           name="message"
           value={toSend.message}
-          placeholder="Type your message"
           onChange={handleChange}
-        ></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </div>
+          sx={{
+            width: 300,
+            height: 340,
+            mt: 4,
+          }}
+        ></TextField>
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{
+            color: "common.white",
+          }}
+        >
+          {" "}
+          Send
+        </Button>
+      </Box>
+      {/* Conditionally render success or error message */}
+      {successfulSubmit && (
+        <Stack
+          direction="row"
+          alignItems="center"
+          gap={1}
+          sx={{ color: "success.main", alignSelf: "center", mt: 2 }}
+        >
+          <CheckCircleOutlineIcon />
+          <Typography> Your message has been sent! </Typography>
+        </Stack>
+      )}
+      {unsuccessfulSubmit && (
+        <Stack
+          direction="row"
+          alignItems="center"
+          gap={1}
+          sx={{ color: "error.main", alignSelf: "center", mt: 2 }}
+        >
+          <ErrorOutlineIcon />
+          <Typography>
+            {" "}
+            {errorMessage || "An error occurred. Please try again later."}{" "}
+          </Typography>
+        </Stack>
+      )}
+    </Box>
   );
 }
 
