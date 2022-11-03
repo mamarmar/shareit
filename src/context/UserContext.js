@@ -19,7 +19,7 @@ function Auth({ children }) {
             setUnsuccessfulSubmit(false);
             setSuccessfulSubmit(true);
             setTimeout(()=> {
-                navigate("/requested/new");
+                navigate("/");
                 window.location.reload()
             }, 1000);
         }catch(err) {

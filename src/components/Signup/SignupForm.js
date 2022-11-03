@@ -75,7 +75,7 @@ export default function SignUp() {
       setUnsuccessfulSubmit(false);
       setSuccessfulSubmit(true);
       setTimeout(()=> {
-        navigate("/requested/new");
+        navigate("/");
         window.location.reload()
       }, 2000);
     }catch(err) {

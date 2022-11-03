@@ -27,7 +27,7 @@ function DeletePopUp({ setShowDeletePopUp, requestedItem }) {
         config
       );
       console.log(res);
-      navigate("/requested/new");
+      navigate("/");
       window.location.reload();
     } catch (err) {
       console.log({ error: err });
