@@ -7,8 +7,6 @@ import Stack from "@mui/material/Stack";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 //React Router
 import { Link } from "react-router-dom";
-//Background
-import background from "../../images/background.png";
 
 export default function Footer() {
   return (
@@ -17,12 +15,6 @@ export default function Footer() {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        backgroundImage:`url(${background})`,
-        backgroundSize: "cover",
-        backgroundPosition:"center",
-        backgroundRepeat:"no-repeat",
-        boxShadow:12,
-        mt:5
       }}
     >
       <CssBaseline />
