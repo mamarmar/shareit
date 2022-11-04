@@ -33,6 +33,8 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
     "Storage",
     "Clothing",
     "Vehicles",
+    "Furniture",
+    "Hobbies",
     "Electronics",
     "Musical Instruments",
     "Sports",

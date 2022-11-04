@@ -60,7 +60,7 @@ export default function OfferedItemCard(props) {
             alt="pink chair"
           />
           <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
+            <Typography gutterBottom variant="h5" component="div">
               {props.itemName.length < 13
                 ? props.itemName
                 : `${props.itemName.substring(0, 11)}...`}

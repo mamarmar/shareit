@@ -56,6 +56,8 @@ export default function RequestedItemForm() {
     "Storage",
     "Clothing",
     "Vehicles",
+    "Furniture",
+    "Hobbies",
     "Electronics",
     "Musical Instruments",
     "Sports",

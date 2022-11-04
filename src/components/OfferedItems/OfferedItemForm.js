@@ -56,6 +56,8 @@ export default function OfferedItemForm() {
     "Storage",
     "Clothing",
     "Vehicles",
+    "Furniture",
+    "Hobbies",
     "Electronics",
     "Musical Instruments",
     "Sports",
