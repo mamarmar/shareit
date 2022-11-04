@@ -92,6 +92,12 @@ const UserProfile = () => {
           {user.firstName}'s Items
         </Typography>
         <Stack direction="column" spacing={2}>
+          {(user.itemsBorrowed.length === 0 && user.itemsLent.length === 0) &&
+          <Typography
+          sx={{
+            color: "grey.500",
+          }}
+          >No item listings yet.</Typography>}
           {user.itemsBorrowed.length > 0 && (
             <Stack
               direction="column"
