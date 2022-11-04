@@ -33,7 +33,7 @@ function Homepage({ offeredItems, setOfferedItems }) {
         alignItems={{ xs: "center", md: "start" }}
         spacing={{ xs: 5, md: 3 }}
         sx={{
-          width: { xs: 300, md: "60%" },
+          width: { xs: 300, md: 700 },
           mx: { xs: 0, md: 20 },
           mt: { xs: 15, md: 20, xl: 30 },
         }}
@@ -44,6 +44,7 @@ function Homepage({ offeredItems, setOfferedItems }) {
             sx={{
               fontSize: { xs: 48, md: 60 },
               textAlign: "left",
+              maxWidth:700
             }}
           >
             Borrow & lend items within your community.

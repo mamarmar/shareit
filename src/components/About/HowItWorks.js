@@ -58,7 +58,7 @@ function HowItWorks() {
         alignItems: "center",
         gap: { xs: 5, md: 8 },
         mt: 10,
-        mx: { xs: 5, sm: 10, md: 10 },
+        mx: { xs: 5, sm: 10, },
       }}
     >
       <Typography
@@ -70,7 +70,7 @@ function HowItWorks() {
       >
         How it Works
       </Typography>
-      <Grid container spacing={4}>
+      <Grid container spacing={{xs:2, md:3, xl:8}} px={{xs:0, sm:1, md:2, lag:5, }}>
         {steps.map((step) => {
           return (
             <Grid item xs={12} sm={6} md={3}>
@@ -82,8 +82,8 @@ function HowItWorks() {
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 1,
-                  height: { xs: 200, sm: 270 },
-                  bgcolor: "grey.300",
+                  height: { xs: 200, sm: 240 },
+                  bgcolor: "grey.200",
                   p: 2,
                   borderRadius: 1,
                 }}
@@ -119,6 +119,7 @@ function HowItWorks() {
         })}
       </Grid>
       <Stack
+      spacing={2}
         sx={{
           mt: 10,
           alignSelf: "start",
@@ -216,6 +217,7 @@ function HowItWorks() {
           to="/howitworks#top"
           style={{
             color: "#03A9F4",
+            // marginTop:5
           }}
         >
           Back to top
@@ -226,16 +228,31 @@ function HowItWorks() {
         justifyContent="center"
         alignItems="center"
         color="grey.600"
+        mt={5}
+        maxWidth={540}
+        spacing={1}
       >
-        <FavoriteIcon />
+        <FavoriteIcon 
+          sx={{
+            color:"primary.light"
+          }}
+        />
         <Typography
           sx={{
             textAlign: "center",
+            fontSize:14
           }}
         >
           Share the word to expand our community. Remember that by using shareit
           you do your part in reducing your ecological foorprint, in line with
           the first of the '3 Rs' of waste management (Reduce, Reuse, Recycle).
+        </Typography>
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontSize:14
+          }}
+        >
           Sharing is caring & we care about our planet!
         </Typography>
       </Stack>
