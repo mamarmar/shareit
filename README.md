@@ -33,8 +33,6 @@ By buying less you do your part in reducing your ecological foorprint, in line w
 
 <img width="900px" src="./screenshots/homepage.png">
 
-More screenshots can be found <a href="https://github.com/mamarmar/shareit/blob/main/README.md#screenshots">here</a>.
-
 ## Technologies Used (Extended)
 
 - [MongoDB](https://www.mongodb.com/)
@@ -62,4 +60,10 @@ More screenshots can be found <a href="https://github.com/mamarmar/shareit/blob/
 Some of the features to be implemented in the future are:
 
 - Allow users to upload their own images (profile picture, offered item images, etc)
-- Include a Google Map with markers for every offered/requsted item
+- Include a Google Map with a marker for every offered/requsted item
+
+## Special Thanks To
+
+- [Yasmeen Othman](https://github.com/YasmeenOthman), for her guidance and continuous support throughout this fascinating journey.
+- All the students and the tutors at the [Social Hackers Academy](https://github.com/SocialHackersAcademy), for creating a nice little community of passionate people offering their best for each other.
+
