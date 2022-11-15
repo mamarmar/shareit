@@ -2,7 +2,7 @@
 <img width="400px" src="./src/images/logo-white-bg.png">
 </p>
 
-<h1 align="center">shareit<br>Item Sharing Platform</h1>
+<h1 align="center">Item Sharing Platform</h1>
 
 [![MIT license](https://img.shields.io/badge/License-GPLv3-01004c.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Version](https://img.shields.io/badge/version-1.0.0-01004c.svg)](https://shields.io/)
