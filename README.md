@@ -31,6 +31,6 @@ shareit is a full-stack [MERN](https://www.mongodb.com/languages/mern-stack-tuto
 
 By buying less you do your part in reducing your ecological foorprint, in line with the first of [the '3 Rs' of waste management (Reduce, Reuse, Recycle)](https://en.wikipedia.org/wiki/Waste_management#Principles_of_waste_management).
 
-<img width="600px" src="./homepage.png">
+<img width="600px" src="./screenshots/homepage.png">
 
 More screenshots can be found <a href="https://github.com/mamarmar/shareit/blob/main/README.md#screenshots">here</a>.
