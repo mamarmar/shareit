@@ -31,6 +31,35 @@ shareit is a full-stack [MERN](https://www.mongodb.com/languages/mern-stack-tuto
 
 By buying less you do your part in reducing your ecological foorprint, in line with the first of [the '3 Rs' of waste management (Reduce, Reuse, Recycle)](https://en.wikipedia.org/wiki/Waste_management#Principles_of_waste_management).
 
-<img width="600px" src="./screenshots/homepage.png">
+<img width="900px" src="./screenshots/homepage.png">
 
 More screenshots can be found <a href="https://github.com/mamarmar/shareit/blob/main/README.md#screenshots">here</a>.
+
+## Technologies Used (Extended)
+
+- [MongoDB](https://www.mongodb.com/)
+  <br>MongoDB Atlas is a cloud-based database service. This is where all our data is stored.
+- [Express](https://github.com/nexus-js/ui)
+  <br>Express is a Node.js web application framework. It makes handling our data processing logic much easier.
+- [React](https://reactjs.org/)
+  <br>React is a JavaScript library used to implement the front end.
+- [Node.js](https://nodejs.org/en/)
+  <br>Node.js is a back end JavaScript runtime environment that allows us to develop our server-side logic using good old JavaScript.
+- [MUI](https://mui.com/)
+  <br>Matierial UI components were used to achieve a clean and minimal design as well as responsiveness.
+- [npm](https://github.com/npm/cli)
+  <br>Our beloved package manager.
+
+
+
+## Roadmap
+
+### Currently Working On
+- Bug fixes
+
+### Future Plans
+
+Some of the features to be implemented in the future are:
+
+- Allow users to upload their own images (profile picture, offered item images, etc)
+- Include a Google Map with markers for every offered/requsted item
