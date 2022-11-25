@@ -85,7 +85,7 @@ const Header = ({
     };
     try {
       const res = await axios.get(
-        `https://shareitapplication.herokuapp.com/requesteditems/`,
+        `${process.env.REACT_APP_SERVER_URL}/requesteditems/`,
         config
       );
       setRequestedItems(res.data.data);
