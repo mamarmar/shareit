@@ -67,7 +67,8 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
         sx={{
           pt: { xs:2, md: 1 },
           alignItems: "center",
-          boxShadow: 3
+          borderTop:1,
+          borderColor:"grey.300"
         }}
       >
         <Stack

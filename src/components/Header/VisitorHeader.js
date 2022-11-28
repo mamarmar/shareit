@@ -44,7 +44,7 @@ const VisitorHeader = ({ offeredItems, setOfferedItems }) => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "common.white" }}>
+    <AppBar position="static" sx={{ bgcolor: "common.white", boxShadow:"none" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Box

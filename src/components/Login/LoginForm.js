@@ -70,7 +70,7 @@ async function handleSubmit(event) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
           {/* Conditionally render success or error message */}
           {successfulSubmit &&
@@ -114,7 +114,7 @@ async function handleSubmit(event) {
               variant="contained"
               sx={{ mt: 3, mb: 2, bgcolor:"primary.light", fontSize:"16px" }}
             >
-              Sign In
+              Log In
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
