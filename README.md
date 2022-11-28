@@ -2,7 +2,7 @@
 <img width="400px" src="./src/images/logo-white-bg.png">
 </p>
 
-<h1 align="center">shareit<br>Item Sharing Platform</h1>
+<h1 align="center">Item Sharing Platform</h1>
 
 [![MIT license](https://img.shields.io/badge/License-GPLv3-01004c.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Version](https://img.shields.io/badge/version-1.0.0-01004c.svg)](https://shields.io/)
@@ -31,6 +31,39 @@ shareit is a full-stack [MERN](https://www.mongodb.com/languages/mern-stack-tuto
 
 By buying less you do your part in reducing your ecological foorprint, in line with the first of [the '3 Rs' of waste management (Reduce, Reuse, Recycle)](https://en.wikipedia.org/wiki/Waste_management#Principles_of_waste_management).
 
-<img width="600px" src="./homepage.png">
+<img width="900px" src="./screenshots/homepage.png">
 
-More screenshots can be found <a href="https://github.com/mamarmar/shareit/blob/main/README.md#screenshots">here</a>.
+## Technologies Used (Extended)
+
+- [MongoDB](https://www.mongodb.com/)
+  <br>MongoDB Atlas is a cloud-based database service. This is where all our data is stored.
+- [Express](https://github.com/nexus-js/ui)
+  <br>Express is a Node.js web application framework. It makes handling our data processing logic much easier.
+- [React](https://reactjs.org/)
+  <br>React is a JavaScript library used to implement the front end.
+- [Node.js](https://nodejs.org/en/)
+  <br>Node.js is a back end JavaScript runtime environment that allows us to develop our server-side logic using good old JavaScript.
+- [MUI](https://mui.com/)
+  <br>Matierial UI components were used to achieve a clean and minimal design as well as responsiveness.
+- [npm](https://github.com/npm/cli)
+  <br>Our beloved package manager.
+
+
+
+## Roadmap
+
+### Currently Working On
+- Bug fixes
+
+### Future Plans
+
+Some of the features to be implemented in the future are:
+
+- Allow users to upload their own images (profile picture, offered item images, etc)
+- Include a Google Map with a marker for every offered/requsted item
+
+## Special Thanks To
+
+- [Yasmeen Othman](https://github.com/YasmeenOthman), for her guidance and continuous support throughout this fascinating journey.
+- All the students and the tutors at the [Social Hackers Academy](https://github.com/SocialHackersAcademy), for creating a nice little community of passionate people offering their best for each other.
+
