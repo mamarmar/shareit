@@ -21,6 +21,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://mui.com/"><img src="https://github.com/mamarmar/tech-icons/blob/main/icons/materialui/materialui-original.svg" height="50px" /></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.emailjs.com/"><img src="https://github.com/mamarmar/tech-icons/blob/main/icons/emailjs/emailjs.png" height="50px" /></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 More info about the technologies can be found <a href="https://github.com/mamarmar/shareit/blob/main/README.md#technologies-used-extended">here</a>.
 
@@ -47,6 +49,8 @@ By buying less you do your part in reducing your ecological foorprint, in line w
   <br>Matierial UI components were used to achieve a clean and minimal design as well as responsiveness.
 - [npm](https://github.com/npm/cli)
   <br>Our beloved package manager.
+- [EmailJS](https://www.emailjs.com/)
+  <br>With EmailJS emails can be sent directly through the app.
 
 
 
