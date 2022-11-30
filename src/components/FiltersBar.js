@@ -132,7 +132,7 @@ export default function FiltersBar({ filterItems, setFilteredResults }) {
           direction="row"
           sx={{
             width: 200,
-            gap: {xs:1, md:3}
+            spacing: {xs:1, md:3}
           }}
         >
           <Tooltip title="Apply filters">
