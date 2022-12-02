@@ -35,6 +35,8 @@ By buying less you do your part in reducing your ecological foorprint, in line w
 
 <img width="900px" src="./screenshots/homepage.png">
 
+The server-side code can be found [here](https://github.com/mamarmar/shareit-server).
+
 ## Technologies Used (Extended)
 
 - [MongoDB](https://www.mongodb.com/)
